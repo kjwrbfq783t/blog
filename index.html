@@ -55,6 +55,31 @@
     <main>
         <h2>Introduzione</h2>
         <p>Questa è una pagina HTML di base creata come esempio. Puoi usarla come punto di partenza per i tuoi progetti.</p>
+         <h2>Tell Us About Yourself</h2>
+        <form action="#" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+            <label for="preferences">What do you like? (Select all that apply):</label>
+            <select id="preferences" name="preferences" multiple>
+                <option value="music">Music</option>
+                <option value="movies">Movies</option>
+                <option value="sports">Sports</option>
+                <option value="travel">Travel</option>
+                <option value="reading">Reading</option>
+            </select>
+
+            <label for="comments">Additional Comments:</label>
+            <textarea id="comments" name="comments" placeholder="Tell us more about yourself..." rows="4"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
     </main>
     <footer>
         <p>&copy; 2025 - Tutti i diritti riservati.</p>
