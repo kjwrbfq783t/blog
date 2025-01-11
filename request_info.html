@@ -79,6 +79,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
         function handleSubmit(event) {
             event.preventDefault(); // Evita il comportamento predefinito del form
+            // Raccogliere i dati dal form
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+             var message = document.getElementById("message").value;
+
+
+    // Inviare i dati al Data Layer
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        event: "formSubmit",
+        formData: {
+            name: name,
+            email: email,
+            message: message
+        }
+    });
             window.location.href = 'https://kjwrbfq783t.github.io/blog/thankyou.html'; // Reindirizza alla thank-you page
         }
     </script>
