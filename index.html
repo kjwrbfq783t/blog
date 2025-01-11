@@ -1,133 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-    
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10951608307">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-10951608307');
-</script>
-
-
-
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NCJKSJ37');</script>
-<!-- End Google Tag Manager -->
-
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina HTML Base</title>
+    <title>Homepage</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
             color: #333;
         }
-        header {
-            background: #007BFF;
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .button {
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
             color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav {
-            text-align: center;
-            margin: 20px 0;
-        }
-        nav a {
-            margin: 0 10px;
-            color: #007BFF;
+            background-color: #4CAF50;
             text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        main {
-            padding: 20px;
-        }
-        footer {
-            text-align: center;
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
-            margin-top: 20px;
+        .button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCJKSJ37"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-
-    
-    <header>
-        <h1>Benvenuto nella mia pagina</h1>
-    </header>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#about">Chi siamo</a>
-        <a href="#contact">Contatti</a>
-    </nav>
-    <main>
-        <h2>Introduzione</h2>
-        <p>Questa è una pagina HTML di base creata come esempio. Puoi usarla come punto di partenza per i tuoi progetti.</p>
-         <h2>Tell Us About Yourself</h2>
-   <h2>Tell Us About Yourself</h2>
-        <form action="#" method="POST">
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-
-    <label for="favoritePizza">Favorite Pizza:</label>
-    <input type="text" id="favoritePizza" name="favoritePizza" placeholder="Enter your favorite pizza" required>
-
-    <label for="toppings">Preferred Toppings (Select all that apply):</label>
-    <select id="toppings" name="toppings" multiple>
-        <option value="pepperoni">Pepperoni</option>
-        <option value="mushrooms">Mushrooms</option>
-        <option value="onions">Onions</option>
-        <option value="sausage">Sausage</option>
-        <option value="bacon">Bacon</option>
-        <option value="extraCheese">Extra Cheese</option>
-        <option value="blackOlives">Black Olives</option>
-        <option value="greenPeppers">Green Peppers</option>
-        <option value="pineapple">Pineapple</option>
-        <option value="spinach">Spinach</option>
-    </select>
-
-    <label for="crust">Preferred Crust Type:</label>
-    <select id="crust" name="crust">
-        <option value="thin">Thin Crust</option>
-        <option value="thick">Thick Crust</option>
-        <option value="stuffed">Stuffed Crust</option>
-        <option value="glutenFree">Gluten-Free</option>
-    </select>
-
-    <label for="comments">Any Additional Notes:</label>
-    <textarea id="comments" name="comments" placeholder="Tell us more about your pizza preferences..." rows="4"></textarea>
-
-    <button type="submit">Submit</button>
-</form>
-    </main>
-    <footer>
-        <p>&copy; 2025 - Tutti i diritti riservati.</p>
-    </footer>
+    <div class="container">
+        <h1>Welcome to Our Homepage</h1>
+        <p>Select an action below:</p>
+        <a href="https://kjwrbfq783t.github.io/blog/thankyou.html" class="button">Go to Thank You Page</a>
+        <a href="https://kjwrbfq783t.github.io/blog/request_info.html" class="button">Go to Contact Form</a>
+    </div>
 </body>
 </html>
