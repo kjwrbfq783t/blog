@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ecommerce Demo - Pagamento Bonifico</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap');
+
+    :root {
+      --color-bg: #ffffff;
+      --color-text-base: #6b7280;
+      --color-text-dark: #111827;
+      --color-primary: #111111;
+      --color-primary-hover: #444444;
+      --border-radius: 0.75rem;
+      --shadow-light: 0 2px 10px rgba(0,0,0,0.05);
+      --font-headline: 'Outfit', sans-serif;
+      --spacing-section-vertical: 4rem;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-headline);
+      background: var(--color-bg);
+      color: var(--color-text-base);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: var(--color-primary-hover);
+      outline: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 1000;
+      padding: 1rem 0;
+      box-shadow: var(--shadow-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      letter-spacing: 1px;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: #f3f4f6;
+    }
+
+    /* Hero */
+    .hero {
+      padding: var(--spacing-section-vertical) 0;
+      text-align: center;
+      color: var(--color-primary);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--color-text-base);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.125rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: var(--color-primary-hover);
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    /* Products Grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+      padding-bottom: var(--spacing-section-vertical);
+    }
+    .card {
+      background: #fafafa;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover,
+    .card:focus-within {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .card img {
+      border-radius: var(--border-radius);
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+      color: var(--color-primary);
+    }
+    .card p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: var(--color-text-base);
+      margin-bottom: 1rem;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    /* Cart and Checkout */
+    .cart-container {
+      background: #f9fafb;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-light);
+      max-width: 600px;
+      margin-bottom: var(--spacing-section-vertical);
+    }
+    .cart-header {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 1rem;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-total {
+      text-align: right;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      color: var(--color-primary);
+    }
+    .empty-cart {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 1.125rem;
+      color: #9ca3af;
+    }
+
+    /* Checkout form */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--color-primary);
+    }
+    input, textarea {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: var(--color-primary);
+      font-family: var(--font-headline);
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 5px rgba(17, 17, 17, 0.3);
+    }
+    .checkout-note {
+      background: #e0f2fe;
+      border-left: 4px solid #0284c7;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      color: #0369a1;
+      border-radius: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Google Tag Manager DataLayer -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+</head>
+<body>
+  <header class="container" role="banner">
+    <a href="#" class="logo" aria-label="Home">ShopDemo</a>
+    <nav role="navigation" aria-label="Main menu">
+      <a href="#products" id="nav-products">Prodotti</a>
+      <a href="#cart" id="nav-cart">Carrello (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Benvenuti in ShopDemo</h1>
+      <p>Il tuo ecommerce di fiducia con pagamento tramite bonifico bancario.</p>
+      <button class="btn-primary" id="browse-products-btn" aria-describedby="browse-desc">Sfoglia i prodotti</button>
+      <p id="browse-desc" class="sr-only">Scorri alla sezione prodotti</p>
+    </section>
+
+    <section id="products" aria-labelledby="products-title">
+      <h2 id="products-title" style="color: var(--color-primary); font-weight: 700; font-size: 2rem; margin-bottom:1rem;">I nostri prodotti</h2>
+      <div class="products" id="product-list">
+        <!-- Products inserted by JS -->
+      </div>
+    </section>
+
+    <section id="cart" aria-labelledby="cart-title" tabindex="-1" style="margin-bottom: var(--spacing-section-vertical);">
+      <h2 id="cart-title" class="cart-header">Il tuo Carrello</h2>
+      <div class="cart-container" id="cart-container" aria-live="polite">
+        <p class="empty-cart" id="empty-cart-msg">Il carrello è vuoto.</p>
+        <div id="cart-items" hidden>
+          <!-- Cart items inserted here -->
+          <div class="cart-total" id="cart-total">Totale: €0,00</div>
+          <button class="btn-primary" id="checkout-btn">Procedi al pagamento</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="checkout-section" aria-labelledby="checkout-title" hidden>
+      <h2 id="checkout-title" style="color: var(--color-primary); font-weight: 700; font-size: 2rem; margin-bottom:1rem;">Pagamento Bonifico Bancario</h2>
+      <div class="cart-container">
+        <form id="checkout-form" aria-describedby="checkout-note">
+          <p class="checkout-note" id="checkout-note">
+            Dopo l'invio del modulo, riceverai le istruzioni per eseguire il bonifico bancario. Ricorda di indicare il numero ordine come causale.
+          </p>
+          <label for="customer-name">Nome e Cognome *</label>
+          <input type="text" id="customer-name" name="customerName" required autocomplete="name" aria-required="true" />
+
+          <label for="customer-email">Email *</label>
+          <input type="email" id="customer-email" name="customerEmail" required autocomplete="email" aria-required="true" />
+
+          <label for="customer-phone">Telefono</label>
+          <input type="tel" id="customer-phone" name="customerPhone" autocomplete="tel" />
+
+          <label for="customer-address">Indirizzo di fatturazione *</label>
+          <textarea id="customer-address" name="customerAddress" rows="3" required aria-required="true"></textarea>
+
+          <button type="submit" class="btn-primary">Invia Ordine</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Fictitious products data
+    const products = [
+      { id: 'p1', name: 'Notebook Elegante', description: 'Notebook elegante per ogni occasione.', price: 1299.90, image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p2', name: 'Penna Stilografica', description: 'Penna stilografica di alta qualità.', price: 79.50, image: 'https://images.unsplash.com/photo-1524813684322-6e2ce1fc905c?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p3', name: 'Zaino Moderno', description: 'Zaino moderno e resistente per il lavoro quotidiano.', price: 149.00, image: 'https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p4', name: 'Auricolari Wireless', description: 'Auricolari wireless con suono cristallino.', price: 199.99, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80' }
+    ];
+
+    // Cart state
+    let cart = [];
+
+    // Format price as Euro string
+    function formatPrice(price) {
+      return price.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    }
+
+    // Render product cards
+    function renderProducts() {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
+      products.forEach(product => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.setAttribute('tabindex', '0');
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" loading="lazy" />
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <div class="price">${formatPrice(product.price)}</div>
+          <button class="btn-primary" data-product-id="${product.id}" aria-label="Aggiungi ${product.name} al carrello">Aggiungi al Carrello</button>
+        `;
+        productList.appendChild(card);
+      });
+    }
+
+    // Update cart count in nav
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+
+    // Render cart items
+    function renderCart() {
+      const emptyMsg = document.getElementById('empty-cart-msg');
+      const cartItemsContainer = document.getElementById('cart-items');
+
+      if (cart.length === 0) {
+        emptyMsg.removeAttribute('hidden');
+        cartItemsContainer.setAttribute('hidden', '');
+        return;
+      }
+      emptyMsg.setAttribute('hidden', '');
+      cartItemsContainer.removeAttribute('hidden');
+
+      // Clear previous items except total and checkout
+      // Remove dynamically created cart-item divs before total
+      const existingItems = cartItemsContainer.querySelectorAll('.cart-item');
+      existingItems.forEach(item => item.remove());
+
+      // Add cart items
+      cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <span>${product.name} × ${item.quantity}</span>
+          <span>${formatPrice(product.price * item.quantity)}</span>
+        `;
+        cartItemsContainer.insertBefore(div, document.getElementById('cart-total'));
+      });
+
+      // Update total
+      const total = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return sum + product.price * item.quantity;
+      }, 0);
+
+      document.getElementById('cart-total').textContent = 'Totale: ' + formatPrice(total);
+    }
+
+    // Add product to cart, update state and dataLayer event
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ id: productId, quantity: 1 });
+      }
+      updateCartCount();
+      renderCart();
+
+      // Push dataLayer event for add to cart
+      window.dataLayer.push({
+        event: 'addToCart',
+        ecommerce: {
+          currencyCode: 'EUR',
+          add: {
+            products: [{
+              id: product.id,
+              name: product.name,
+              price: product.price.toFixed(2),
+              quantity: 1
+            }]
+          }
+        }
+      });
+      console.log('dataLayer push: addToCart', product.name);
+    }
+
+    // Simulate order submission and push order event with fictitious order data
+    function submitOrder(formData) {
+      if (cart.length === 0) {
+        alert('Il carrello è vuoto. Aggiungi prodotti prima di procedere.');
+        return false;
+      }
+
+      // Fictitious order ID (random)
+      const orderId = 'ORD' + Math.floor(Math.random() * 1000000);
+
+      const productsOrdered = cart.map(item => {
+        const p = products.find(prod => prod.id === item.id);
+        return {
+          id: p.id,
+          name: p.name,
+          price: p.price.toFixed(2),
+          quantity: item.quantity
+        };
+      });
+
+      const totalAmount = productsOrdered.reduce((sum, p) => sum + p.price * p.quantity, 0);
+
+      // Push purchase event to dataLayer
+      window.dataLayer.push({
+        event: 'purchase',
+        ecommerce: {
+          purchase: {
+            actionField: {
+              id: orderId,
+              affiliation: 'ShopDemo Ecommerce',
+              revenue: totalAmount.toFixed(2),
+              tax: '0',
+              shipping: '0',
+              payment_type: 'Bonifico Bancario'
+            },
+            products: productsOrdered
+          }
+        },
+        customer: {
+          name: formData.get('customerName'),
+          email: formData.get('customerEmail'),
+          phone: formData.get('customerPhone'),
+          address: formData.get('customerAddress')
+        }
+      });
+      console.log('dataLayer push: purchase order', orderId);
+
+      alert(`Ordine ${orderId} inviato con successo! Riceverai presto le istruzioni per il bonifico.`);
+      return true;
+    }
+
+    // Event listeners setup
+    function setupEventListeners() {
+      // Product add to cart buttons
+      document.getElementById('product-list').addEventListener('click', e => {
+        if (e.target.tagName === 'BUTTON' && e.target.dataset.productId) {
+          addToCart(e.target.dataset.productId);
+        }
+      });
+
+      // Browse products button scroll
+      document.getElementById('browse-products-btn').addEventListener('click', () => {
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Checkout button reveal checkout form
+      document.getElementById('checkout-btn').addEventListener('click', () => {
+        document.getElementById('checkout-section').hidden = false;
+        document.getElementById('checkout-section').focus();
+        window.scrollTo({ top: document.getElementById('checkout-section').offsetTop - 60, behavior: 'smooth' });
+      });
+
+      // Checkout form submission
+      document.getElementById('checkout-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const form = e.target;
+
+        if (!form.reportValidity()) {
+          return;
+        }
+
+        const formData = new FormData(form);
+
+        const success = submitOrder(formData);
+        if (success) {
+          cart = [];
+          updateCartCount();
+          renderCart();
+          form.reset();
+          document.getElementById('checkout-section').hidden = true;
+          document.getElementById('cart').focus();
+        }
+      });
+    }
+
+    // Initialize page
+    function init() {
+      renderProducts();
+      updateCartCount();
+      renderCart();
+      setupEventListeners();
+
+      // Initial dataLayer pageview event
+      window.dataLayer.push({
+        event: 'pageview',
+        page: {
+          title: document.title,
+          url: location.href
+        }
+      });
+      console.log('dataLayer push: pageview');
+    }
+
+    // Accessibility helper for screen reader only text
+    (function addSrOnlyStyles() {
+      const style = document.createElement('style');
+      style.textContent = `.sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0,0,0,0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }`;
+      document.head.appendChild(style);
+    })();
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
+
