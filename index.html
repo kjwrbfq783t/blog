@@ -270,12 +270,41 @@
 <body>
 
 <script>
-hbspt.forms.create({
+if (window.hbspt) {
+    hbspt.forms.create({
       region: 'eu1',
       portalId: '147076390',
       formId: 'a8ed8824-9522-400b-9308-f71df8ec1f92',
+        onBeforeFormSubmit: function ($form) {
+          console.log("prima di inviare")
+  },
     });
+  } else {
+    // In un ambiente che supporta gli eventi di caricamento
+    // potresti usare un listener, ma un setTimeout è spesso
+    // il modo più semplice per i form HubSpot
+    setTimeout(function() {
+        if (window.hbspt) {
+            hbspt.forms.create({
+              region: 'eu1',
+              portalId: '147076390',
+              formId: 'a8ed8824-9522-400b-9308-f71df8ec1f92',
+            });
+        }
+    }, 500); // Ritardo di 500 millisecondi
+  }
 </script>
+  <script>
+
+    window.addEventListener('message', (event) => {
+  if (
+    event.data.type === 'hsFormCallback' &&
+    event.data.eventName === 'onFormSubmitted'
+  ) {
+    console.log('Form Submitted! Event data: ${event.data}');
+  }
+});
+  </script>
   <header class="container" role="banner">
     <a href="#" class="logo" aria-label="Home">ShopDemo</a>
     <nav role="navigation" aria-label="Main menu">
