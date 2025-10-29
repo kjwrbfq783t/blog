@@ -265,19 +265,8 @@
 </head>
 <body>
 
-<script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
-<script>
-  setTimeout(function() {
-        
-            hbspt.forms.create({
-    portalId: "147076390",
-    formId: "c28fb90d-9383-4b74-b473-f9fdfc6719b1",
-    region: "eu1"
-  });
-        
-    }, 500); // Ritardo di 500 millisecondi
-  
-</script>
+<script src="https://js-eu1.hsforms.net/forms/embed/147076390.js" defer></script>
+<div class="hs-form-frame" data-region="eu1" data-form-id="a8ed8824-9522-400b-9308-f71df8ec1f92" data-portal-id="147076390"></div>
   <script>
 
     window.addEventListener('message', (event) => {
@@ -286,7 +275,9 @@
     event.data.eventName === 'onFormSubmitted'
   ) {
     console.log('Form Submitted! Event data: ${event.data}');
-  }
+  }else{
+    console.log("condizioni non corrette");
+    console.log(event.data)
 });
   </script>
   <header class="container" role="banner">
