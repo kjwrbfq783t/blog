@@ -13,102 +13,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&display=swap');
 
-/* Stili Generali della Sezione */
-#hubspot-form-testing {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px 30px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-#hubspot-form-testing h2 {
-    color: #007bff; /* Blu HubSpot/Azzurro */
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-#hubspot-form-testing h3 {
-    color: #333;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-size: 1.25em;
-}
-
-#hubspot-form-testing hr {
-    border: 0;
-    height: 1px;
-    background: #e0e0e0;
-    margin: 20px 0;
-}
-
-/* Stile Codice */
-#hubspot-form-testing pre {
-    background-color: #f4f4f4; /* Sfondo grigio chiaro per il codice */
-    border: 1px solid #ddd;
-    border-left: 5px solid #007bff; /* Barra laterale blu */
-    padding: 10px 15px;
-    margin: 15px 0;
-    overflow-x: auto;
-    border-radius: 4px;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 0.9em;
-}
-
-#hubspot-form-testing code {
-    color: #d81b60; /* Colore di evidenziazione per il codice */
-}
-
-/* Stile Liste (Istruzioni) */
-#hubspot-form-testing ol {
-    padding-left: 20px;
-}
-
-#hubspot-form-testing ol li {
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-/* Stile Tabelle (Parametri) */
-#hubspot-form-testing table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 0.9em;
-}
-
-#hubspot-form-testing th, 
-#hubspot-form-testing td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
-    text-align: left;
-}
-
-#hubspot-form-testing th {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-#hubspot-form-testing tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Righe alternate */
-}
-
-#hubspot-form-testing tbody tr:hover {
-    background-color: #e6f2ff; /* Evidenziazione al passaggio del mouse */
-}
-
-#hubspot-form-testing td:first-child {
-    font-weight: bold;
-    color: #333;
-    white-space: nowrap; /* Mantiene il nome del parametro su una riga */
-}
     :root {
       --color-bg: #ffffff;
       --color-text-base: #6b7280;
@@ -364,159 +268,290 @@
 <body>
 
 
-<section id="hubspot-form-testing">
-    <h2>✍️ Integrazione e Testing dei Form HubSpot</h2>
+<style>
+/* Stili Generali della Sezione */
+#main-hubspot-container {
+    /* Contenitore principale Flexbox per le due colonne */
+    display: flex; 
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    <p>Questa sezione contiene il codice di base per l'embedding di un form HubSpot e le istruzioni per testarlo direttamente nella console del browser.</p>
+/* Stile per la colonna della documentazione (sinistra) */
+#hubspot-form-testing {
+    flex: 2; /* Occupare 2/3 dello spazio */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
 
-    <hr>
+/* Stile per la colonna del div di test (destra) */
+#testing-target-container {
+    flex: 1; /* Occupare 1/3 dello spazio */
+    padding: 20px;
+    border: 2px dashed #007bff; /* Bordo blu tratteggiato in evidenza */
+    border-radius: 8px;
+    background-color: #e6f2ff;
+    min-height: 400px; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-    <h3>💻 Codice di Esempio per l'Embedding</h3>
-    <p>Il seguente blocco di codice <strong>JavaScript</strong> mostra la configurazione minima per caricare un form HubSpot:</p>
-    <pre><code>hbspt.forms.create({
+#hubspot-form-testing h2 {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#hubspot-form-testing h3, #testing-target-container h3 {
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.25em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+#testing-target-container h3 {
+    color: #007bff;
+    border-bottom: 1px solid #007bff;
+}
+
+#hubspot-form-testing hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 20px 0;
+}
+
+/* Stile Codice */
+#hubspot-form-testing pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 5px solid #007bff;
+    padding: 10px 15px;
+    margin: 15px 0;
+    overflow-x: auto;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+#hubspot-form-testing code {
+    color: #d81b60;
+}
+
+/* Stile Liste */
+#hubspot-form-testing ol {
+    padding-left: 20px;
+}
+
+#hubspot-form-testing ol li {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Stile Tabelle (Parametri) */
+#hubspot-form-testing table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+#hubspot-form-testing th, 
+#hubspot-form-testing td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    text-align: left;
+}
+
+#hubspot-form-testing th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#hubspot-form-testing tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#hubspot-form-testing tbody tr:hover {
+    background-color: #e6f2ff;
+}
+
+#hubspot-form-testing td:first-child {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+/* Stile del Div Target interno */
+#hubspot-form-container {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-style: italic;
+    text-align: center;
+}
+</style>
+
+<div id="main-hubspot-container">
+    
+    <section id="hubspot-form-testing">
+        <h2>✍️ Integrazione e Testing dei Form HubSpot</h2>
+
+        <p>Questa sezione contiene il codice di base per l'embedding di un form HubSpot e le istruzioni per testarlo direttamente nella console del browser.</p>
+
+        <hr>
+
+        <h3>💻 Codice di Esempio per l'Embedding</h3>
+        <p>Il seguente blocco di codice <strong>JavaScript</strong> mostra la configurazione minima per caricare un form HubSpot:</p>
+        <pre><code>hbspt.forms.create({
     portalId: "147076390",
     formId: "e478edf8-da31-4a90-bcaa-9a8209aad522",
     region: "eu1",
 });</code></pre>
 
-    <h3>➡️ Istruzioni per il Caricamento in Console</h3>
-    <ol>
-        <li>
-            <p><strong>Crea un contenitore (solo per il test manuale in console):</strong> Assicurati che un elemento di destinazione esista nel tuo <code>body</code>. Ad esempio:</p>
-            <pre><code>&lt;div id="hubspot-form-container"&gt;&lt;/div&gt;</code></pre>
-        </li>
-        <li>
-            <p><strong>Esegui il comando di creazione in Console:</strong> Apri la console del browser ed esegui il codice di configurazione, includendo il parametro <code>target</code> per specificare il contenitore.</p>
-            <pre><code>hbspt.forms.create({
+        <h3>➡️ Istruzioni per il Caricamento in Console</h3>
+        <ol>
+            <li>
+                <p><strong>Osserva il Contenitore Target:</strong> Il contenitore <code>#hubspot-form-container</code> è posizionato nella colonna di destra.</p>
+            </li>
+            <li>
+                <p><strong>Esegui il comando di creazione in Console:</strong> Apri la console del browser ed esegui il codice di configurazione. L'uso di <code>target</code> è cruciale per indicare la posizione esatta.</p>
+                <pre><code>hbspt.forms.create({
     portalId: "147076390",
     formId: "e478edf8-da31-4a90-bcaa-9a8209aad522",
     region: "eu1",
-    target: "#hubspot-form-container" // Usa il selettore del tuo contenitore
+    target: "#hubspot-form-container" // Target del div a destra
 });</code></pre>
-            <p>Questo caricherà il form all'interno dell'elemento specificato.</p>
-        </li>
-    </ol>
+                <p>Questo caricherà il form nel riquadro di fianco.</p>
+            </li>
+        </ol>
 
-    <hr>
+        <hr>
 
-    <h3>📋 Riferimento Parametri <code>hbspt.forms.create()</code></h3>
+        <h3>📋 Riferimento Parametri <code>hbspt.forms.create()</code></h3>
 
-    <h4>Parametri di Base e Styling</h4>
-    <table>
-        <thead>
-            <tr>
-                <th>Parametro</th>
-                <th>Tipo</th>
-                <th>Descrizione</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>portalId</strong></td>
-                <td>Number or string</td>
-                <td>L'ID dell'account HubSpot che ha creato il form.</td>
-            </tr>
-            <tr>
-                <td><strong>formId</strong></td>
-                <td>String</td>
-                <td>L'ID del form.</td>
-            </tr>
-            <tr>
-                <td><strong>region</strong></td>
-                <td>String</td>
-                <td>La regione dell'account (<code>na1</code> o <code>eu1</code>).</td>
-            </tr>
-            <tr>
-                <td><strong>target</strong></td>
-                <td>String</td>
-                <td>Un selettore CSS valido per l'elemento in cui verrà incorporato il form. Fortemente consigliato.</td>
-            </tr>
-            <tr>
-                <td><strong>redirectUrl</strong></td>
-                <td>String</td>
-                <td>L'URL di reindirizzamento dopo l'invio. Non usabile con <code>inlineMessage</code>.</td>
-            </tr>
-            <tr>
-                <td><strong>inlineMessage</strong></td>
-                <td>String</td>
-                <td>Il messaggio da mostrare al posto del form dopo l'invio. Non usabile con <code>redirectUrl</code>.</td>
-            </tr>
-            <tr>
-                <td><strong>pageId</strong></td>
-                <td>Number or string</td>
-                <td>L'ID della pagina HubSpot su cui si sta incorporando il form.</td>
-            </tr>
-            <tr>
-                <td><strong>cssRequired</strong></td>
-                <td>String</td>
-                <td>Stringa CSS per messaggi di errore e styling. Settare a <code>""</code> per rimuovere lo styling di default di HubSpot.</td>
-            </tr>
-            <tr>
-                <td><strong>cssClass</strong></td>
-                <td>String</td>
-                <td>La classe CSS che verrà applicata al form.</td>
-            </tr>
-            <tr>
-                <td><strong>cssString</strong></td>
-                <td>String</td>
-                <td>Stringa CSS usata al posto del tema integrato per styling personalizzato.</td>
-            </tr>
-            <tr>
-                <td><strong>submitText</strong></td>
-                <td>String</td>
-                <td>Testo che sovrascrive il testo del pulsante di invio.</td>
-            </tr>
-            <tr>
-                <td><strong>formInstanceId</strong></td>
-                <td>String</td>
-                <td><strong>Obbligatorio</strong> quando si incorpora lo stesso form più volte sulla stessa pagina. Deve essere unico.</td>
-            </tr>
-            <tr>
-                <td><strong>locale</strong></td>
-                <td>String</td>
-                <td>Il locale del form, usato per personalizzare la lingua (errori, data, etichette, ecc.).</td>
-            </tr>
-        </tbody>
-    </table>
+        <h4>Parametri di Base e Styling</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parametro</th>
+                    <th>Tipo</th>
+                    <th>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>portalId</strong></td>
+                    <td>Number or string</td>
+                    <td>L'ID dell'account HubSpot.</td>
+                </tr>
+                <tr>
+                    <td><strong>formId</strong></td>
+                    <td>String</td>
+                    <td>L'ID del form.</td>
+                </tr>
+                <tr>
+                    <td><strong>region</strong></td>
+                    <td>String</td>
+                    <td>La regione dell'account (<code>na1</code> o <code>eu1</code>).</td>
+                </tr>
+                <tr>
+                    <td><strong>target</strong></td>
+                    <td>String</td>
+                    <td>Selettore CSS valido per l'elemento in cui incorporare il form.</td>
+                </tr>
+                <tr>
+                    <td><strong>redirectUrl</strong></td>
+                    <td>String</td>
+                    <td>URL di reindirizzamento dopo l'invio (non usabile con <code>inlineMessage</code>).</td>
+                </tr>
+                <tr>
+                    <td><strong>inlineMessage</strong></td>
+                    <td>String</td>
+                    <td>Messaggio da mostrare al posto del form dopo l'invio (non usabile con <code>redirectUrl</code>).</td>
+                </tr>
+                <tr>
+                    <td><strong>cssRequired</strong></td>
+                    <td>String</td>
+                    <td>Stringa CSS per styling. Settare a <code>""</code> per rimuovere lo styling di default.</td>
+                </tr>
+                <tr>
+                    <td><strong>formInstanceId</strong></td>
+                    <td>String</td>
+                    <td><strong>Obbligatorio</strong> se si incorpora lo stesso form più volte. Deve essere unico.</td>
+                </tr>
+                <tr>
+                    <td><strong>locale</strong></td>
+                    <td>String</td>
+                    <td>Il locale del form, usato per la lingua (errori, data, ecc.).</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h4>Parametri Callback (Funzioni)</h4>
-    <table>
-        <thead>
-            <tr>
-                <th>Parametro</th>
-                <th>Tipo</th>
-                <th>Descrizione</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>onBeforeFormInit</strong></td>
-                <td>Function</td>
-                <td>Callback che esegue <strong>prima</strong> della costruzione del form.</td>
-            </tr>
-            <tr>
-                <td><strong>onFormReady</strong></td>
-                <td>Function</td>
-                <td>Callback che esegue appena <strong>prima</strong> del rendering del form.</td>
-            </tr>
-            <tr>
-                <td><strong>onFormSubmit</strong></td>
-                <td>Function</td>
-                <td>Callback che esegue dopo la validazione e <strong>prima</strong> dell'invio al server. <em>Sconsigliato per reindirizzamenti.</em></td>
-            </tr>
-            <tr>
-                <td><strong>onBeforeFormSubmit</strong></td>
-                <td>Function</td>
-                <td>Simile a <code>onFormSubmit</code>, preferito per il nome più preciso del trigger. Esegue <strong>prima</strong> dell'invio. <em>Sconsigliato per reindirizzamenti.</em></td>
-            </tr>
-            <tr>
-                <td><strong>onFormSubmitted</strong></td>
-                <td>Function</td>
-                <td>Callback che esegue <strong>dopo</strong> l'invio del form. Ideale per messaggi di conferma o <strong>reindirizzamenti personalizzati</strong>.</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+        <h4>Parametri Callback (Funzioni)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parametro</th>
+                    <th>Tipo</th>
+                    <th>Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>onBeforeFormInit</strong></td>
+                    <td>Function</td>
+                    <td>Esegue <strong>prima</strong> della costruzione del form.</td>
+                </tr>
+                <tr>
+                    <td><strong>onFormReady</strong></td>
+                    <td>Function</td>
+                    <td>Esegue appena <strong>prima</strong> del rendering del form.</td>
+                </tr>
+                <tr>
+                    <td><strong>onFormSubmit / onBeforeFormSubmit</strong></td>
+                    <td>Function</td>
+                    <td>Eseguono dopo la validazione e <strong>prima</strong> dell'invio al server.</td>
+                </tr>
+                <tr>
+                    <td><strong>onFormSubmitted</strong></td>
+                    <td>Function</td>
+                    <td>Esegue <strong>dopo</strong> l'invio del form. Ideale per reindirizzamenti personalizzati.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <div id="testing-target-container">
+        <h3>🎯 Contenitore Target per il Form</h3>
+        <p>Questo è il <code>&lt;div id="hubspot-form-container"&gt;</code>. Quando esegui il codice JavaScript nella console, il form apparirà qui sotto.</p>
+        
+        <div id="hubspot-form-container">
+            Il form HubSpot apparirà qui (Esegui il codice in Console)
+        </div>
+    </div>
+</div>
   <header class="container" role="banner">
     <a href="#" class="logo" aria-label="Home">ShopDemo</a>
     <nav role="navigation" aria-label="Main menu">
