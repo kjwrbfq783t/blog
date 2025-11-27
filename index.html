@@ -3,7 +3,7 @@
 <html lang="it">
 <head>
   <script type="text/javascript" src="https://embeds.iubenda.com/widgets/1c1062ed-216f-4abd-b5b4-edbee2678fc0.js"></script>
-   <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js" async></script>
+   <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
 
 
 
@@ -268,15 +268,159 @@
 <body>
 
 
-<script>
-  hbspt.forms.create({
+<section id="hubspot-form-testing">
+    <h2>✍️ Integrazione e Testing dei Form HubSpot</h2>
+
+    <p>Questa sezione contiene il codice di base per l'embedding di un form HubSpot e le istruzioni per testarlo direttamente nella console del browser.</p>
+
+    <hr>
+
+    <h3>💻 Codice di Esempio per l'Embedding</h3>
+    <p>Il seguente blocco di codice <strong>JavaScript</strong> mostra la configurazione minima per caricare un form HubSpot:</p>
+    <pre><code>hbspt.forms.create({
     portalId: "147076390",
     formId: "e478edf8-da31-4a90-bcaa-9a8209aad522",
     region: "eu1",
-    onFormSubmitted: function ($form, data){
-     dataLayer.push({event: "hsFormSubmission", email: data.submissionValues.email});
-  }});
-</script>
+});</code></pre>
+
+    <h3>➡️ Istruzioni per il Caricamento in Console</h3>
+    <ol>
+        <li>
+            <p><strong>Crea un contenitore (solo per il test manuale in console):</strong> Assicurati che un elemento di destinazione esista nel tuo <code>body</code>. Ad esempio:</p>
+            <pre><code>&lt;div id="hubspot-form-container"&gt;&lt;/div&gt;</code></pre>
+        </li>
+        <li>
+            <p><strong>Esegui il comando di creazione in Console:</strong> Apri la console del browser ed esegui il codice di configurazione, includendo il parametro <code>target</code> per specificare il contenitore.</p>
+            <pre><code>hbspt.forms.create({
+    portalId: "147076390",
+    formId: "e478edf8-da31-4a90-bcaa-9a8209aad522",
+    region: "eu1",
+    target: "#hubspot-form-container" // Usa il selettore del tuo contenitore
+});</code></pre>
+            <p>Questo caricherà il form all'interno dell'elemento specificato.</p>
+        </li>
+    </ol>
+
+    <hr>
+
+    <h3>📋 Riferimento Parametri <code>hbspt.forms.create()</code></h3>
+
+    <h4>Parametri di Base e Styling</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Parametro</th>
+                <th>Tipo</th>
+                <th>Descrizione</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>portalId</strong></td>
+                <td>Number or string</td>
+                <td>L'ID dell'account HubSpot che ha creato il form.</td>
+            </tr>
+            <tr>
+                <td><strong>formId</strong></td>
+                <td>String</td>
+                <td>L'ID del form.</td>
+            </tr>
+            <tr>
+                <td><strong>region</strong></td>
+                <td>String</td>
+                <td>La regione dell'account (<code>na1</code> o <code>eu1</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>target</strong></td>
+                <td>String</td>
+                <td>Un selettore CSS valido per l'elemento in cui verrà incorporato il form. Fortemente consigliato.</td>
+            </tr>
+            <tr>
+                <td><strong>redirectUrl</strong></td>
+                <td>String</td>
+                <td>L'URL di reindirizzamento dopo l'invio. Non usabile con <code>inlineMessage</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>inlineMessage</strong></td>
+                <td>String</td>
+                <td>Il messaggio da mostrare al posto del form dopo l'invio. Non usabile con <code>redirectUrl</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>pageId</strong></td>
+                <td>Number or string</td>
+                <td>L'ID della pagina HubSpot su cui si sta incorporando il form.</td>
+            </tr>
+            <tr>
+                <td><strong>cssRequired</strong></td>
+                <td>String</td>
+                <td>Stringa CSS per messaggi di errore e styling. Settare a <code>""</code> per rimuovere lo styling di default di HubSpot.</td>
+            </tr>
+            <tr>
+                <td><strong>cssClass</strong></td>
+                <td>String</td>
+                <td>La classe CSS che verrà applicata al form.</td>
+            </tr>
+            <tr>
+                <td><strong>cssString</strong></td>
+                <td>String</td>
+                <td>Stringa CSS usata al posto del tema integrato per styling personalizzato.</td>
+            </tr>
+            <tr>
+                <td><strong>submitText</strong></td>
+                <td>String</td>
+                <td>Testo che sovrascrive il testo del pulsante di invio.</td>
+            </tr>
+            <tr>
+                <td><strong>formInstanceId</strong></td>
+                <td>String</td>
+                <td><strong>Obbligatorio</strong> quando si incorpora lo stesso form più volte sulla stessa pagina. Deve essere unico.</td>
+            </tr>
+            <tr>
+                <td><strong>locale</strong></td>
+                <td>String</td>
+                <td>Il locale del form, usato per personalizzare la lingua (errori, data, etichette, ecc.).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Parametri Callback (Funzioni)</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Parametro</th>
+                <th>Tipo</th>
+                <th>Descrizione</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>onBeforeFormInit</strong></td>
+                <td>Function</td>
+                <td>Callback che esegue <strong>prima</strong> della costruzione del form.</td>
+            </tr>
+            <tr>
+                <td><strong>onFormReady</strong></td>
+                <td>Function</td>
+                <td>Callback che esegue appena <strong>prima</strong> del rendering del form.</td>
+            </tr>
+            <tr>
+                <td><strong>onFormSubmit</strong></td>
+                <td>Function</td>
+                <td>Callback che esegue dopo la validazione e <strong>prima</strong> dell'invio al server. <em>Sconsigliato per reindirizzamenti.</em></td>
+            </tr>
+            <tr>
+                <td><strong>onBeforeFormSubmit</strong></td>
+                <td>Function</td>
+                <td>Simile a <code>onFormSubmit</code>, preferito per il nome più preciso del trigger. Esegue <strong>prima</strong> dell'invio. <em>Sconsigliato per reindirizzamenti.</em></td>
+            </tr>
+            <tr>
+                <td><strong>onFormSubmitted</strong></td>
+                <td>Function</td>
+                <td>Callback che esegue <strong>dopo</strong> l'invio del form. Ideale per messaggi di conferma o <strong>reindirizzamenti personalizzati</strong>.</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
   <header class="container" role="banner">
     <a href="#" class="logo" aria-label="Home">ShopDemo</a>
     <nav role="navigation" aria-label="Main menu">
