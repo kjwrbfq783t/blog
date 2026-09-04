@@ -193,6 +193,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        color: #1f73e6;
      }
 
+     /* Video Player Container */
+     .video-container {
+       position: fixed;
+       top: 100px;
+       right: 20px;
+       z-index: 1000;
+       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+       border-radius: 8px;
+       overflow: hidden;
+     }
+
+     .video-container iframe {
+       display: block;
+       border: none;
+     }
+
      .footer {
        background-color: #f8f9fa;
        padding: 24px 48px;
@@ -220,6 +236,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
        h1 {
          font-size: 24px;
+       }
+
+       .video-container {
+         position: static;
+         margin-bottom: 24px;
        }
      }
    </style>
@@ -397,57 +418,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <p>© 2026 Google - Centro di Supporto Dimentico™ | <a href="#" style="color: #80868b; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #80868b; text-decoration: none;">Termini che nessuno legge</a></p>
   </footer>
 
-  <!-- Hidden YouTube Player -->
-  <div style="position: fixed; bottom: -9999px; right: -9999px; width: 1px; height: 1px; opacity: 0; z-index: -9999; pointer-events: none;">
+  <!-- YouTube Player Visibile -->
+  <div class="video-container">
     <iframe 
       id="youtube-player"
-      width="1" 
-      height="1" 
-      src="https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8" 
+      width="360" 
+      height="203" 
+      src="https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=1&loop=1&playlist=wA1S0p7Yli8" 
       frameborder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-      allowfullscreen
-      style="border: none;">
+      allowfullscreen>
     </iframe>
   </div>
 
   <script>
-    // Forza autoplay YouTube
-    window.addEventListener('load', function() {
-      // Attendi un momento per assicurare che l'iframe sia caricato
-      setTimeout(function() {
-        console.log('🎺 Caricamento audio...');
-        
-        // Tenta di inviare un messaggio all'iframe per assicurare autoplay
-        const iframe = document.getElementById('youtube-player');
-        if (iframe) {
-          // YouTube richiede mute per autoplay in alcuni browser
-          // Prova a riprodurre con permessi completi
-          iframe.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8&enablejsapi=1';
-        }
-        
-        // Fallback: crea un audio element come alternativa
-        const audio = document.createElement('audio');
-        audio.setAttribute('autoplay', 'autoplay');
-        audio.setAttribute('playsinline', 'playsinline');
-        audio.setAttribute('loop', 'loop');
-        audio.style.display = 'none';
-        
-        // Usa una sorgente audio diretta (convertita dal video)
-        audio.innerHTML = '<source src="https://www.youtube.com/watch?v=wA1S0p7Yli8" type="audio/mpeg">';
-        
-        document.body.appendChild(audio);
-        
-        // Tenta di riprodurre manualmente su interazione utente se autoplay non funziona
-        document.addEventListener('click', function() {
-          audio.play().catch(function(error) {
-            console.log('Autoplay bloccato, ma audio è pronto al click');
-          });
-        }, { once: true });
-        
-      }, 500);
-    });
-
     // Interattività sidebar
     document.querySelectorAll('.sidebar-link').forEach(link => {
       link.addEventListener('click', function(e) {
