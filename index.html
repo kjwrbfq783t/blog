@@ -397,31 +397,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <p>© 2026 Google - Centro di Supporto Dimentico™ | <a href="#" style="color: #80868b; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #80868b; text-decoration: none;">Termini che nessuno legge</a></p>
   </footer>
 
+  <!-- Hidden YouTube Player -->
+  <div style="position: fixed; bottom: -9999px; right: -9999px; width: 1px; height: 1px; opacity: 0; z-index: -9999; pointer-events: none;">
+    <iframe 
+      id="youtube-player"
+      width="1" 
+      height="1" 
+      src="https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+      allowfullscreen
+      style="border: none;">
+    </iframe>
+  </div>
+
   <script>
-    // Audio autoplay - usa direttamente il file video di YouTube
+    // Forza autoplay YouTube
     window.addEventListener('load', function() {
-      // Crea un tag audio per riprodurre il video di YouTube come audio
-      const audio = document.createElement('audio');
-      audio.setAttribute('autoplay', 'autoplay');
-      audio.setAttribute('playsinline', 'playsinline');
-      audio.volume = 1;
-      
-      // Usa yt1s o un servizio simile per convertire il video in audio
-      audio.src = 'https://www.youtube.com/watch?v=wA1S0p7Yli8';
-      
-      // Fallback: usa iframe di YouTube con controlli nascosti
-      const container = document.body;
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.style.width = '0';
-      iframe.style.height = '0';
-      iframe.style.border = 'none';
-      iframe.setAttribute('src', 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1');
-      iframe.setAttribute('allow', 'autoplay');
-      
-      container.appendChild(iframe);
-      
-      console.log('🎺 Audio test avviato...');
+      // Attendi un momento per assicurare che l'iframe sia caricato
+      setTimeout(function() {
+        console.log('🎺 Caricamento audio...');
+        
+        // Tenta di inviare un messaggio all'iframe per assicurare autoplay
+        const iframe = document.getElementById('youtube-player');
+        if (iframe) {
+          // YouTube richiede mute per autoplay in alcuni browser
+          // Prova a riprodurre con permessi completi
+          iframe.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8&enablejsapi=1';
+        }
+        
+        // Fallback: crea un audio element come alternativa
+        const audio = document.createElement('audio');
+        audio.setAttribute('autoplay', 'autoplay');
+        audio.setAttribute('playsinline', 'playsinline');
+        audio.setAttribute('loop', 'loop');
+        audio.style.display = 'none';
+        
+        // Usa una sorgente audio diretta (convertita dal video)
+        audio.innerHTML = '<source src="https://www.youtube.com/watch?v=wA1S0p7Yli8" type="audio/mpeg">';
+        
+        document.body.appendChild(audio);
+        
+        // Tenta di riprodurre manualmente su interazione utente se autoplay non funziona
+        document.addEventListener('click', function() {
+          audio.play().catch(function(error) {
+            console.log('Autoplay bloccato, ma audio è pronto al click');
+          });
+        }, { once: true });
+        
+      }, 500);
     });
 
     // Interattività sidebar
