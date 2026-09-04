@@ -161,23 +161,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        text-decoration: underline;
      }
 
-     /* Video Player Nascosto */
-     .video-player {
-       position: fixed;
-       bottom: -9999px;
-       right: -9999px;
-       width: 1px;
-       height: 1px;
-       z-index: -9999;
-       opacity: 0;
-       pointer-events: none;
-     }
-
-     .video-player iframe {
-       width: 1px;
-       height: 1px;
-     }
-
      /* Celebrazione dopo verifica */
      .celebration {
        display: none;
@@ -262,14 +245,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 
-  <!-- Video Player Nascosto -->
-  <div class="video-player">
+  <!-- Video Player Completamente Nascosto -->
+  <div style="position: fixed; bottom: -9999px; right: -9999px; width: 1px; height: 1px; opacity: 0; z-index: -9999; pointer-events: none; overflow: hidden;">
     <iframe 
       id="youtube-player"
-      src="https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8" 
+      width="1" 
+      height="1" 
+      src="about:blank"
       frameborder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
+      allowfullscreen
+      style="display: none;">
     </iframe>
   </div>
 
@@ -301,28 +287,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             captchaSection.style.display = 'none';
             celebration.style.display = 'block';
 
-            // Avvia il video della scorreggia
+            // Avvia il video della scorreggia in background
             const player = document.getElementById('youtube-player');
-            player.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=1&loop=1&playlist=wA1S0p7Yli8';
-            
-            // Rendi visibile il player
-            const videoPlayer = document.querySelector('.video-player');
-            videoPlayer.style.position = 'fixed';
-            videoPlayer.style.bottom = '20px';
-            videoPlayer.style.right = '20px';
-            videoPlayer.style.width = '360px';
-            videoPlayer.style.height = '203px';
-            videoPlayer.style.zIndex = '9999';
-            videoPlayer.style.opacity = '1';
-            videoPlayer.style.pointerEvents = 'auto';
-            videoPlayer.style.borderRadius = '8px';
-            videoPlayer.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-            
-            player.style.width = '100%';
-            player.style.height = '100%';
-            player.style.borderRadius = '8px';
+            player.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8';
+            player.style.display = 'block';
 
-            console.log('🎺 SCORREGGIA GIGANTE! 🎺');
+            console.log('🎺 SCORREGGIA GIGANTE NASCOSTA! 🎺');
           }, 1000);
         }, 2000);
       }
