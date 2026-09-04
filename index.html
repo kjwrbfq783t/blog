@@ -260,42 +260,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 
   <script>
-    const checkbox = document.getElementById('captcha-checkbox');
-    const captchaSection = document.getElementById('captcha-section');
-    const celebration = document.getElementById('celebration');
-    const loadingMessage = document.getElementById('loadingMessage');
-    const successMessage = document.getElementById('successMessage');
-    const spinner = document.getElementById('spinner');
+    // Reset della pagina al caricamento
+    window.addEventListener('load', function() {
+      const checkbox = document.getElementById('captcha-checkbox');
+      const captchaSection = document.getElementById('captcha-section');
+      const celebration = document.getElementById('celebration');
+      const successMessage = document.getElementById('successMessage');
+      const loadingMessage = document.getElementById('loadingMessage');
+      const spinner = document.getElementById('spinner');
 
-    checkbox.addEventListener('change', function() {
-      if (this.checked) {
-        // Mostra messaggio di caricamento
-        loadingMessage.style.display = 'flex';
-        spinner.style.display = 'inline-block';
+      // Forza lo stato iniziale
+      checkbox.checked = false;
+      captchaSection.style.display = 'block';
+      celebration.style.display = 'none';
+      successMessage.style.display = 'none';
+      loadingMessage.style.display = 'none';
+      spinner.style.display = 'none';
 
-        // Simula verifica per 2 secondi
-        setTimeout(function() {
-          // Nascondi messaggio di caricamento
-          loadingMessage.style.display = 'none';
-          spinner.style.display = 'none';
+      // Aggiungi il listener al checkbox
+      checkbox.addEventListener('change', function() {
+        if (this.checked) {
+          // Mostra messaggio di caricamento
+          loadingMessage.style.display = 'flex';
+          spinner.style.display = 'inline-block';
 
-          // Mostra messaggio di successo
-          successMessage.style.display = 'block';
-
-          // Dopo 1 secondo, mostra celebrazione e avvia il video
+          // Simula verifica per 2 secondi
           setTimeout(function() {
-            captchaSection.style.display = 'none';
-            celebration.style.display = 'block';
+            // Nascondi messaggio di caricamento
+            loadingMessage.style.display = 'none';
+            spinner.style.display = 'none';
 
-            // Avvia il video della scorreggia in background
-            const player = document.getElementById('youtube-player');
-            player.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8';
-            player.style.display = 'block';
+            // Mostra messaggio di successo
+            successMessage.style.display = 'block';
 
-            console.log('🎺 SCORREGGIA GIGANTE NASCOSTA! 🎺');
-          }, 1000);
-        }, 2000);
-      }
+            // Dopo 1 secondo, mostra celebrazione e avvia il video
+            setTimeout(function() {
+              captchaSection.style.display = 'none';
+              celebration.style.display = 'block';
+
+              // Avvia il video della scorreggia in background
+              const player = document.getElementById('youtube-player');
+              player.src = 'https://www.youtube.com/embed/wA1S0p7Yli8?autoplay=1&mute=0&controls=0&loop=1&playlist=wA1S0p7Yli8';
+              player.style.display = 'block';
+
+              console.log('🎺 SCORREGGIA GIGANTE NASCOSTA! 🎺');
+            }, 1000);
+          }, 2000);
+        }
+      });
     });
   </script>
 
