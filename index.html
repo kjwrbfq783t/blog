@@ -184,17 +184,19 @@
         <strong>Behavior:</strong> On submit, prevents page reload and reveals a hidden &lt;div&gt; with ID <span class="code-hint">#thank-you-visibility</span>. Ideal for testing GTM's <em>Element Visibility</em> trigger.
       </p>
 
-      <form id="form-element-visibility">
-        <div class="form-group">
-          <label for="visibility-name">Full Name</label>
-          <input type="text" id="visibility-name" name="visibility_name" placeholder="John Doe" required>
-        </div>
-        <div class="form-group">
-          <label for="visibility-email">Email Address</label>
-          <input type="email" id="visibility-email" name="visibility_email" placeholder="john@example.com" required>
-        </div>
-        <button type="submit" id="btn-submit-visibility">Submit Form 1</button>
-      </form>
+      <div id="form-1-container">
+        <form id="form-element-visibility">
+          <div class="form-group">
+            <label for="visibility-name">Full Name</label>
+            <input type="text" id="visibility-name" name="visibility_name" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="visibility-email">Email Address</label>
+            <input type="email" id="visibility-email" name="visibility_email" placeholder="john@example.com" required>
+          </div>
+          <button type="submit" id="btn-submit-visibility">Submit Form 1</button>
+        </form>
+      </div>
 
       <!-- Element to be tested by Element Visibility trigger -->
       <div id="thank-you-visibility" class="thank-you-message">
@@ -212,21 +214,23 @@
         <strong>Behavior:</strong> Displays a thank-you message and executes a <span class="code-hint">dataLayer.push()</span> with event name <span class="code-hint">generate_lead</span>, passing user data.
       </p>
 
-      <form id="form-datalayer-push">
-        <div class="form-group">
-          <label for="dl-name">Full Name</label>
-          <input type="text" id="dl-name" name="dl_name" placeholder="Alice Smith" required>
-        </div>
-        <div class="form-group">
-          <label for="dl-email">Email Address</label>
-          <input type="email" id="dl-email" name="dl_email" placeholder="alice@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="dl-phone">Phone Number</label>
-          <input type="tel" id="dl-phone" name="dl_phone" placeholder="+1234567890">
-        </div>
-        <button type="submit" id="btn-submit-datalayer">Submit Form 2</button>
-      </form>
+      <div id="form-2-container">
+        <form id="form-datalayer-push">
+          <div class="form-group">
+            <label for="dl-name">Full Name</label>
+            <input type="text" id="dl-name" name="dl_name" placeholder="Alice Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="dl-email">Email Address</label>
+            <input type="email" id="dl-email" name="dl_email" placeholder="alice@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="dl-phone">Phone Number</label>
+            <input type="tel" id="dl-phone" name="dl_phone" placeholder="+1234567890">
+          </div>
+          <button type="submit" id="btn-submit-datalayer">Submit Form 2</button>
+        </form>
+      </div>
 
       <div id="thank-you-datalayer" class="thank-you-message">
         Success! Form 2 submitted. Event 'generate_lead' pushed to dataLayer.
@@ -308,11 +312,14 @@
     // FORM 1: Element Visibility
     document.getElementById('form-element-visibility').addEventListener('submit', function(e) {
       e.preventDefault();
-      const formContent = this;
+      const formContainer = document.getElementById('form-1-container');
       const thankYouEl = document.getElementById('thank-you-visibility');
       
-      // Hide the form content
-      formContent.style.display = 'none';
+      // Clear all form fields
+      this.reset();
+      
+      // Remove the entire form container (including all fields and values)
+      formContainer.remove();
       
       // Show the thank you message
       thankYouEl.style.display = 'block';
@@ -340,8 +347,12 @@
 
       console.log('[dataLayer] Event pushed: generate_lead', window.dataLayer);
 
-      // Hide the form content
-      this.style.display = 'none';
+      // Clear all form fields
+      this.reset();
+
+      // Remove the entire form container (including all fields and values)
+      const formContainer = document.getElementById('form-2-container');
+      formContainer.remove();
 
       // Show confirmation message
       document.getElementById('thank-you-datalayer').style.display = 'block';
