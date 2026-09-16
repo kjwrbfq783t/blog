@@ -209,7 +209,7 @@
       <span class="behavior-tag">Test Case 2</span>
       <h2>Form 2: Custom Event & DataLayer Push</h2>
       <p class="description">
-        <strong>Behavior:</strong> Displays a thank-you message and executes a <span class="code-hint">dataLayer.push()</span> with event name <span class="code-hint">generate_lead</span>, passing user input fields for Data Layer variable extraction and Enhanced Conversions testing.
+        <strong>Behavior:</strong> Displays a thank-you message and executes a <span class="code-hint">dataLayer.push()</span> with event name <span class="code-hint">generate_lead</span>, passing user data.
       </p>
 
       <form id="form-datalayer-push">
@@ -240,7 +240,7 @@
       <span class="behavior-tag">Test Case 3</span>
       <h2>Form 3: Silent Form (Field Clear, No UI Feedback)</h2>
       <p class="description">
-        <strong>Behavior:</strong> On submit, gives absolutely no UI confirmation/feedback to the user, but silently clears all input fields. Useful for testing standard <em>Form Submission</em> triggers that do not rely on DOM changes.
+        <strong>Behavior:</strong> On submit, gives absolutely no UI confirmation/feedback to the user, but silently clears all input fields. Useful for testing standard <em>Form Submission</em> triggers.
       </p>
 
       <form id="form-silent-reset">
@@ -263,7 +263,7 @@
       <span class="behavior-tag">Test Case 4</span>
       <h2>Forms 4A & 4B: Multi-instance CSS Selector Forms (No IDs)</h2>
       <p class="description">
-        <strong>Behavior:</strong> Two distinct forms sharing the exact same CSS selector: <span class="code-hint">form.shared-lead-form</span>. Neither form nor input fields possess unique <span class="code-hint">id</span> attributes. Both forms silently reset their fields on submit with no UI feedback. Ideal for testing CSS selector triggers and multi-element delegation.
+        <strong>Behavior:</strong> Two distinct forms sharing the exact same CSS selector: <span class="code-hint">form.shared-lead-form</span>. Neither form nor input fields possess unique <span class="code-hint">id</span> attributes.
       </p>
 
       <div class="two-column">
@@ -308,7 +308,13 @@
     // FORM 1: Element Visibility
     document.getElementById('form-element-visibility').addEventListener('submit', function(e) {
       e.preventDefault();
+      const formContent = this;
       const thankYouEl = document.getElementById('thank-you-visibility');
+      
+      // Hide the form content
+      formContent.style.display = 'none';
+      
+      // Show the thank you message
       thankYouEl.style.display = 'block';
     });
 
@@ -333,6 +339,9 @@
       });
 
       console.log('[dataLayer] Event pushed: generate_lead', window.dataLayer);
+
+      // Hide the form content
+      this.style.display = 'none';
 
       // Show confirmation message
       document.getElementById('thank-you-datalayer').style.display = 'block';
