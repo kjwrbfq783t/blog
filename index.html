@@ -1,376 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Support & GTM QA Testing Playground</title>
-  
-  <!-- Initialize dataLayer -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-  </script>
-
-  <!-- PASTE YOUR GOOGLE TAG MANAGER (GTM) SNIPPET HERE IF NEEDED -->
-
+  <meta name="description" content="Contattaci per richieste, informazioni o supporto.">
+  <title>Contact us</title>
   <style>
     :root {
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --background: #f6f7fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #d1d5db;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --success: #16a34a;
-      --code-bg: #f1f5f9;
+      --focus: rgba(37, 99, 235, 0.18);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+    * { box-sizing: border-box; }
 
     body {
-      background-color: var(--bg);
+      margin: 0;
+      min-height: 100vh;
+      padding: 32px 16px;
+      display: grid;
+      place-items: center;
+      background: var(--background);
       color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
-      padding: 2rem 1rem;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
+    .contact-card {
+      width: min(100%, 560px);
+      padding: 36px;
+      background: var(--surface);
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
 
-    header {
-      margin-bottom: 2.5rem;
-      text-align: center;
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      letter-spacing: -0.02em;
     }
 
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      color: var(--text-muted);
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .card h2 {
-      font-size: 1.25rem;
-      margin-bottom: 0.25rem;
-      color: var(--primary);
-    }
-
-    .behavior-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      background: var(--code-bg);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .description {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-    }
-
-    .code-hint {
-      background: var(--code-bg);
-      font-family: monospace;
-      font-size: 0.8rem;
-      padding: 0.1rem 0.3rem;
-      border-radius: 3px;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
+    .intro { margin: 0 0 28px; color: var(--muted); }
+    .form-group { margin-bottom: 18px; }
 
     label {
       display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"] {
-      width: 100%;
-      padding: 0.6rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      margin-bottom: 6px;
       font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      background: #fff;
+      font: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    input:focus, textarea:focus {
       outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input:focus {
       border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--focus);
     }
 
-    button[type="submit"] {
+    button {
+      width: 100%;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 6px;
       background: var(--primary);
       color: #fff;
-      border: none;
-      padding: 0.65rem 1.2rem;
-      border-radius: 4px;
-      cursor: pointer;
+      font: inherit;
       font-weight: 600;
-      font-size: 0.95rem;
+      cursor: pointer;
       transition: background 0.2s;
     }
 
-    button[type="submit"]:hover {
-      background: var(--primary-hover);
-    }
+    button:hover { background: var(--primary-hover); }
+    button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-    .thank-you-message {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      background-color: #dcfce7;
-      color: var(--success);
-      border: 1px solid #bbf7d0;
-      border-radius: 4px;
-      font-weight: 600;
-      display: none;
-    }
-
-    .two-column {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media(min-width: 768px) {
-      .two-column {
-        grid-template-columns: 1fr 1fr;
-      }
+    @media (max-width: 480px) {
+      .contact-card { padding: 24px 20px; }
     }
   </style>
 </head>
 <body>
+  <main class="contact-card">
+    <h1>Contact us</h1>
+    <p class="intro">Hai una domanda? Compila il form e ti ricontatteremo al più presto.</p>
 
-  <div class="container">
-    <header>
-      <h1>Tag QA Testing Playground</h1>
-      <p>A single-page form test suite designed for Google Technical Support & GTM Tag Assistant debugging.</p>
-    </header>
-
-    <!-- ============================================================= -->
-    <!-- FORM 1: ELEMENT VISIBILITY TRIGGER TEST                       -->
-    <!-- ============================================================= -->
-    <div class="card">
-      <span class="behavior-tag">Test Case 1</span>
-      <h2>Form 1: Element Visibility Trigger</h2>
-      <p class="description">
-        <strong>Behavior:</strong> On submit, prevents page reload and reveals a hidden &lt;div&gt; with ID <span class="code-hint">#thank-you-visibility</span>. Ideal for testing GTM's <em>Element Visibility</em> trigger.
-      </p>
-
-      <div id="form-1-container">
-        <form id="form-element-visibility">
-          <div class="form-group">
-            <label for="visibility-name">Full Name</label>
-            <input type="text" id="visibility-name" name="visibility_name" placeholder="John Doe" required>
-          </div>
-          <div class="form-group">
-            <label for="visibility-email">Email Address</label>
-            <input type="email" id="visibility-email" name="visibility_email" placeholder="john@example.com" required>
-          </div>
-          <button type="submit" id="btn-submit-visibility">Submit Form 1</button>
-        </form>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
       </div>
 
-      <!-- Element to be tested by Element Visibility trigger -->
-      <div id="thank-you-visibility" class="thank-you-message">
-        Thank you! Form 1 was submitted successfully (Element is now visible).
-      </div>
-    </div>
-
-    <!-- ============================================================= -->
-    <!-- FORM 2: DATALAYER PUSH + ENHANCED DATA TEST                   -->
-    <!-- ============================================================= -->
-    <div class="card">
-      <span class="behavior-tag">Test Case 2</span>
-      <h2>Form 2: Custom Event & DataLayer Push</h2>
-      <p class="description">
-        <strong>Behavior:</strong> Displays a thank-you message and executes a <span class="code-hint">dataLayer.push()</span> with event name <span class="code-hint">generate_lead</span>, passing user data.
-      </p>
-
-      <div id="form-2-container">
-        <form id="form-datalayer-push">
-          <div class="form-group">
-            <label for="dl-name">Full Name</label>
-            <input type="text" id="dl-name" name="dl_name" placeholder="Alice Smith" required>
-          </div>
-          <div class="form-group">
-            <label for="dl-email">Email Address</label>
-            <input type="email" id="dl-email" name="dl_email" placeholder="alice@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="dl-phone">Phone Number</label>
-            <input type="tel" id="dl-phone" name="dl_phone" placeholder="+1234567890">
-          </div>
-          <button type="submit" id="btn-submit-datalayer">Submit Form 2</button>
-        </form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
       </div>
 
-      <div id="thank-you-datalayer" class="thank-you-message">
-        Success! Form 2 submitted. Event 'generate_lead' pushed to dataLayer.
+      <div class="form-group">
+        <label for="subject">Oggetto</label>
+        <input type="text" id="subject" name="subject" required>
       </div>
-    </div>
 
-    <!-- ============================================================= -->
-    <!-- FORM 3: SILENT SUBMIT (RESET ONLY)                            -->
-    <!-- ============================================================= -->
-    <div class="card">
-      <span class="behavior-tag">Test Case 3</span>
-      <h2>Form 3: Silent Form (Field Clear, No UI Feedback)</h2>
-      <p class="description">
-        <strong>Behavior:</strong> On submit, gives absolutely no UI confirmation/feedback to the user, but silently clears all input fields. Useful for testing standard <em>Form Submission</em> triggers.
-      </p>
-
-      <form id="form-silent-reset">
-        <div class="form-group">
-          <label for="silent-name">Full Name</label>
-          <input type="text" id="silent-name" name="silent_name" placeholder="Bob Dylan" required>
-        </div>
-        <div class="form-group">
-          <label for="silent-email">Email Address</label>
-          <input type="email" id="silent-email" name="silent_email" placeholder="bob@example.com" required>
-        </div>
-        <button type="submit" id="btn-submit-silent">Submit Form 3 (Silent)</button>
-      </form>
-    </div>
-
-    <!-- ============================================================= -->
-    <!-- FORMS 4A & 4B: MULTIPLE FORMS WITH IDENTICAL CLASS SELECTORS  -->
-    <!-- ============================================================= -->
-    <div class="card">
-      <span class="behavior-tag">Test Case 4</span>
-      <h2>Forms 4A & 4B: Multi-instance CSS Selector Forms (No IDs)</h2>
-      <p class="description">
-        <strong>Behavior:</strong> Two distinct forms sharing the exact same CSS selector: <span class="code-hint">form.shared-lead-form</span>. Neither form nor input fields possess unique <span class="code-hint">id</span> attributes.
-      </p>
-
-      <div class="two-column">
-        <!-- Instance A -->
-        <div style="border: 1px dashed var(--border); padding: 1rem; border-radius: 6px;">
-          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Instance A</h3>
-          <form class="shared-lead-form">
-            <div class="form-group">
-              <label>Contact Name</label>
-              <input type="text" class="input-name" name="contact_name" placeholder="User A" required>
-            </div>
-            <div class="form-group">
-              <label>Contact Email</label>
-              <input type="email" class="input-email" name="contact_email" placeholder="usera@example.com" required>
-            </div>
-            <button type="submit" class="shared-submit-btn">Submit via Class Selector (A)</button>
-          </form>
-        </div>
-
-        <!-- Instance B -->
-        <div style="border: 1px dashed var(--border); padding: 1rem; border-radius: 6px;">
-          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Instance B</h3>
-          <form class="shared-lead-form">
-            <div class="form-group">
-              <label>Contact Name</label>
-              <input type="text" class="input-name" name="contact_name" placeholder="User B" required>
-            </div>
-            <div class="form-group">
-              <label>Contact Email</label>
-              <input type="email" class="input-email" name="contact_email" placeholder="userb@example.com" required>
-            </div>
-            <button type="submit" class="shared-submit-btn">Submit via Class Selector (B)</button>
-          </form>
-        </div>
+      <div class="form-group">
+        <label for="message">Messaggio</label>
+        <textarea id="message" name="message" required></textarea>
       </div>
-    </div>
 
-  </div>
-
-  <!-- SCRIPT LOGIC -->
-  <script>
-    // FORM 1: Element Visibility
-    document.getElementById('form-element-visibility').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formContainer = document.getElementById('form-1-container');
-      const thankYouEl = document.getElementById('thank-you-visibility');
-      
-      // Clear all form fields
-      this.reset();
-      
-      // Remove the entire form container (including all fields and values)
-      formContainer.remove();
-      
-      // Show the thank you message
-      thankYouEl.style.display = 'block';
-    });
-
-    // FORM 2: DataLayer Push + Message
-    document.getElementById('form-datalayer-push').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const nameVal = document.getElementById('dl-name').value;
-      const emailVal = document.getElementById('dl-email').value;
-      const phoneVal = document.getElementById('dl-phone').value;
-
-      // Push custom event and payload to Google dataLayer
-      window.dataLayer.push({
-        event: 'generate_lead',
-        form_id: 'form-datalayer-push',
-        form_name: 'Lead Generation Form 2',
-        lead_data: {
-          user_name: nameVal,
-          user_email: emailVal,
-          user_phone: phoneVal
-        }
-      });
-
-      console.log('[dataLayer] Event pushed: generate_lead', window.dataLayer);
-
-      // Clear all form fields
-      this.reset();
-
-      // Remove the entire form container (including all fields and values)
-      const formContainer = document.getElementById('form-2-container');
-      formContainer.remove();
-
-      // Show confirmation message
-      document.getElementById('thank-you-datalayer').style.display = 'block';
-    });
-
-    // FORM 3: Silent Submit (Reset only)
-    document.getElementById('form-silent-reset').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.reset();
-    });
-
-    // FORMS 4A & 4B: Shared Class Forms (Reset only, No ID usage)
-    document.querySelectorAll('form.shared-lead-form').forEach(function(formElement) {
-      formElement.addEventListener('submit', function(e) {
-        e.preventDefault();
-        this.reset();
-      });
-    });
-  </script>
+      <button type="submit">Invia messaggio</button>
+    </form>
+  </main>
 </body>
 </html>
