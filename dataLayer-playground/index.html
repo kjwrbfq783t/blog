@@ -706,9 +706,7 @@
 
     // Helper for URL Redirection
     function performRedirect(targetUrl, fallbackHash) {
-      const isVercelHost = window.location.hostname.includes('training-tplis.app.vercel.app') || 
-                           window.location.hostname.includes('vercel.app');
-      
+      const isVercelHost = window.location.hostname.includes('training-tplis.vercel.app')      
       const isIframe = (window.self !== window.top);
 
       if (isVercelHost && !isIframe) {
@@ -993,7 +991,7 @@
 
       // Trigger navigation
       performRedirect(
-        'https://training-tplis.app.vercel.app/dataLayer-playground/order-confirmed',
+        'https://training-tplis.vercel.app/dataLayer-playground/order-confirmed',
         '#/dataLayer-playground/order-confirmed'
       );
     }
@@ -1029,7 +1027,7 @@
 
       // Trigger navigation
       performRedirect(
-        'https://training-tplis.app.vercel.app/dataLayer-playground/thank-you',
+        'https://training-tplis.vercel.app/dataLayer-playground/thank-you',
         '#/dataLayer-playground/thank-you'
       );
     }
