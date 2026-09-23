@@ -165,14 +165,14 @@
           </a>
           <a 
             id="navContact" 
-            href="#/dataLayer-playground/contact" 
+            href="#/store/contact" 
             class="px-2.5 py-1.5 rounded-lg text-slate-700 dark:text-slate-300 hover:text-blue-600 transition"
           >
             Contact
           </a>
           <a 
             id="navCart" 
-            href="#/dataLayer-playground/checkout" 
+            href="#/store/checkout" 
             class="relative px-2.5 py-1.5 rounded-lg text-slate-700 dark:text-slate-300 hover:text-blue-600 flex items-center gap-1.5 transition"
           >
             <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
@@ -243,7 +243,7 @@
 
     </div>
 
-    <!-- VIEW: CONTACT FORM (ROUTE: #/dataLayer-playground/contact) -->
+    <!-- VIEW: CONTACT FORM (ROUTE: #/store/contact) -->
     <div id="routeContact" class="hidden max-w-2xl mx-auto space-y-6">
       <div class="text-center space-y-1.5">
         <h1 class="text-2xl font-bold tracking-tight" id="contactTitle">Enterprise Technical Consultation</h1>
@@ -307,7 +307,7 @@
       </div>
     </div>
 
-    <!-- VIEW: CHECKOUT (ROUTE: #/dataLayer-playground/checkout) -->
+    <!-- VIEW: CHECKOUT (ROUTE: #/store/checkout) -->
     <div id="routeCheckout" class="hidden space-y-6 max-w-4xl mx-auto">
       <div class="flex items-center justify-between">
         <div>
@@ -1297,14 +1297,14 @@
         document.getElementById('navContact').className = 'px-2.5 py-1.5 rounded-lg text-blue-600 dark:text-blue-400 bg-blue-500/10 transition';
         window.dataLayer.push({
           event: 'page_view',
-          page_path: '/dataLayer-playground/contact'
+          page_path: '/store/contact'
         });
       } else if (isCheckout) {
         document.getElementById('routeCheckout').classList.remove('hidden');
         renderCartSummary();
         window.dataLayer.push({
           event: 'page_view',
-          page_path: '/dataLayer-playground/checkout'
+          page_path: '/store/checkout'
         });
       } else {
         // Catalog Route
@@ -1320,7 +1320,7 @@
     }
 
     function performRedirect(targetUrl, fallbackHash) {
-      const isVercelHost = window.location.hostname.includes('training-tplis.app.vercel.app') || 
+      const isVercelHost = window.location.hostname.includes('training-tplis.vercel.app') || 
                            window.location.hostname.includes('vercel.app');
       const isIframe = (window.self !== window.top);
 
@@ -1610,7 +1610,7 @@
 
       // Trigger navigation
       performRedirect(
-        'https://training-tplis.app.vercel.app/dataLayer-playground/order-confirmed',
+        'https://training-tplis.vercel.app/dataLayer-playground/order-confirmed',
         '#/dataLayer-playground/order-confirmed'
       );
     }
@@ -1646,7 +1646,7 @@
 
       // Trigger navigation
       performRedirect(
-        'https://training-tplis.app.vercel.app/dataLayer-playground/thank-you',
+        'https://training-tplis.vercel.app/dataLayer-playground/thank-you',
         '#/dataLayer-playground/thank-you'
       );
     }
