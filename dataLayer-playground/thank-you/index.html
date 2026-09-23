@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messaggio Inviato | Google Tech Solutions Store</title>
+  
+  <script>
+    // RESET REALE: La nuova pagina istanzia il dataLayer da zero.
+    // L'evento 'lead_form_submitted' con l'oggetto 'user_data' è rimasto nella pagina precedente.
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'page_view_thankyou',
+      page_type: 'lead_confirmation',
+      page_location: window.location.href,
+      page_title: 'Contact Thank You'
+    });
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          colors: {
+            googleBlue: '#1a73e8',
+            googleGreen: '#1e8e3e'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
+  
+  <!-- Navigation Header -->
+  <header class="border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 sticky top-0 z-40">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-googleBlue inline-block"></span>
+        <span class="font-semibold tracking-tight text-lg">Google Tech Solutions</span>
+      </div>
+      <a href="/dataLayer-playground/" class="text-sm font-medium text-googleBlue hover:underline">
+        &larr; Torna allo Store
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Contact Thank You Content -->
+  <main class="flex-1 max-w-2xl mx-auto px-4 py-16 w-full text-center flex flex-col items-center justify-center">
+    
+    <!-- Success Icon -->
+    <div class="w-20 h-20 bg-blue-100 dark:bg-blue-950/60 text-googleBlue rounded-full flex items-center justify-center mb-6 shadow-sm border border-blue-200 dark:border-blue-800">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+    </div>
+
+    <h1 class="text-3xl font-extrabold tracking-tight mb-2">Richiesta Ricevuta!</h1>
+    <p class="text-gray-600 dark:text-zinc-400 max-w-md mx-auto mb-8">
+      Un Technical Solution Specialist prenderà in carico la richiesta e ti ricontatterà entro 24 ore lavorative.
+    </p>
+
+    <!-- Info Box -->
+    <div class="w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-6 text-left shadow-sm mb-8 space-y-3">
+      <div class="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-zinc-800">
+        <span class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-500">Priorità Ticket</span>
+        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">
+          Enterprise Tier 1
+        </span>
+      </div>
+      <p class="text-xs text-gray-500 dark:text-zinc-400 leading-relaxed">
+        Le informazioni di contatto e l'indirizzo sono stati registrati nei nostri sistemi CRM interni per la verifica di conformità.
+      </p>
+    </div>
+
+    <!-- Technical Training Note -->
+    <div class="text-xs text-gray-400 dark:text-zinc-500 border border-dashed border-gray-300 dark:border-zinc-700 rounded-xl p-4 w-full text-left bg-gray-100/50 dark:bg-zinc-900/50">
+      <div class="font-bold text-gray-700 dark:text-zinc-300 mb-1 flex items-center gap-1.5">
+        <span>ℹ️</span> Technical Observation (GTM / DevTools):
+      </div>
+      La variabile <code class="font-mono bg-gray-200 dark:bg-zinc-800 px-1 py-0.5 rounded">user_data.email_address</code> su questa pagina risulta <code class="font-mono text-red-500">undefined</code> se ispezionata ora. Questo comprova l'importanza di tracciare le conversioni sul push antecedente al redirect.
+    </div>
+
+    <div class="mt-8">
+      <a href="/dataLayer-playground/" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-googleBlue text-white font-medium hover:bg-blue-600 transition shadow-sm">
+        Ritorna alla Home Catalogo
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-gray-200 dark:border-zinc-800 py-6 text-center text-xs text-gray-500 dark:text-zinc-500">
+    Google Technical Solution Training Sandbox &bull; thank-you
+  </footer>
+
+</body>
+</html>
