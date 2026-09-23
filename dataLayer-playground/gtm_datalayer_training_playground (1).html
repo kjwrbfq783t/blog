@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Cloud Hardware & Solutions Store</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --brand-blue: #1a73e8;
+      --brand-hover: #1557b0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-base: #0b0f17;
+        --bg-surface: #111827;
+        --bg-subtle: #1e293b;
+        --border-color: #1f2937;
+        --border-subtle: #374151;
+        --text-main: #f9fafb;
+        --text-muted: #9ca3af;
+        --text-dim: #6b7280;
+        --brand-blue: #3b82f6;
+        --brand-hover: #60a5fa;
+      }
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .store-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    .store-subtle {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+    }
+
+    .store-input {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .store-input:focus {
+      outline: none;
+      border-color: var(--brand-blue);
+      box-shadow: 0 0 0 1px var(--brand-blue);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
+
+  <script>
+    // Initialize standard DataLayer array without any on-screen visual reflection
+    window.dataLayer = window.dataLayer || [];
+
+    // Multilingual Translations (En, It, De, Es, Nl) - No spoilers, strictly objectives
+    const I18N = {
+      en: {
+        brandSub: "Hardware & Cloud Infrastructure",
+        navCatalog: "Catalog",
+        navContact: "Contact",
+        navCart: "Cart",
+        briefBtn: "Training Objectives",
+        bannerBadge: "Hardware & Edge Devices",
+        bannerTitle: "Device & Security Catalog",
+        bannerDesc: "Explore enterprise hardware items, add devices to cart, and observe DataLayer event behaviors in DevTools or Tag Assistant.",
+        productsTitle: "Available Equipment",
+        btnDetails: "Details",
+        btnAdd: "Add",
+        contactTitle: "Enterprise Technical Advisory",
+        contactDesc: "Submit your technical request to simulate a lead generation flow.",
+        firstName: "First Name",
+        lastName: "Last Name",
+        corpEmail: "Corporate Email",
+        phone: "Phone Number",
+        postalCode: "Postal Code",
+        city: "City",
+        country: "Country",
+        techRequest: "Technical Deployment Scope",
+        requestPlaceholder: "Describe your cluster architecture and security needs...",
+        btnSendLead: "Submit Advisory Request",
+        checkoutTitle: "Cart & Checkout",
+        checkoutDesc: "Complete checkout stages to simulate transactional conversions.",
+        backToCatalog: "← Back to catalog",
+        step1Title: "Shipping & Buyer Information",
+        step1BadgeWaiting: "Pending",
+        step1BadgeDone: "✓ Recorded",
+        fullName: "Full Name",
+        btnConfirmStep1: "Confirm Shipping Details (Step 1)",
+        step2Title: "Payment Method & Purchase",
+        corpInvoiceTitle: "Google Corporate Invoicing",
+        corpInvoiceDesc: "Pre-authorized Tech Solutions Account",
+        corpInvoiceStatus: "Active",
+        btnPay: "Pay & Complete Order",
+        orderSummary: "Order Summary",
+        subtotal: "Subtotal",
+        shipping: "Express Logistics",
+        freeShipping: "Included",
+        total: "Total",
+        emptyCart: "Your cart is currently empty.",
+        orderConfirmedTitle: "Order Successfully Processed",
+        orderConfirmedDesc: "A confirmation dispatch and telemetry manifests have been routed.",
+        leadConfirmedTitle: "Request Received",
+        leadConfirmedDesc: "A Technical Solution Architect will review the parameters shortly.",
+        btnReturnStore: "Return to Store",
+        addedToast: "Item added to cart",
+        drawerTitle: "Training Objectives",
+        drawerSubtitle: "GTM Tag Implementation Checklist",
+        progressText: "Completed",
+        obj1Title: "Objective 1: E-commerce Purchase & Conversion Tag",
+        obj1Desc: "Configure an e-commerce transaction tag in Tag Manager that collects transaction value, currency, transaction ID, the list of purchased items, and customer email for Enhanced Conversions. Inspect the network timing and page redirect lifecycle to determine which DataLayer event trigger should fire this tag.",
+        obj2Title: "Objective 2: Lead Generation Form Tag",
+        obj2Desc: "Set up a tag to capture consultation form submissions. Build Data Layer variables to retrieve contact details (email, phone, postal code, and city) directly from the form submission payload using appropriate dot notation.",
+        obj3Title: "Objective 3: Retail Dynamic Remarketing Tag",
+        obj3Desc: "Implement a Google Ads Dynamic Remarketing tag tailored for the Retail vertical. Ensure the tag reads the product feed identifier and catalog items from the DataLayer when users view products and browse the store.",
+        obj4Title: "Objective 4: Deep Enterprise Property Extraction",
+        obj4Desc: "The checkout payload includes a deeply nested enterprise billing structure. Use browser DevTools and the DataLayer API to locate and extract the compliance security certificate hash without manually parsing large payloads.",
+        guidanceNoticeTitle: "Trainer Notice",
+        guidanceNoticeBody: "No variable names or event triggers are shown here. You must open Chrome DevTools (Console / Network) or Google Tag Assistant to inspect the DataLayer pushes and formulate your GTM configurations.",
+        footerText: "Google Technical Solutions Training Sandbox • Hardware & Cloud Store"
+      },
+      it: {
+        brandSub: "Hardware & Infrastruttura Cloud",
+        navCatalog: "Catalogo",
+        navContact: "Contatti",
+        navCart: "Carrello",
+        briefBtn: "Obiettivi del Training",
+        bannerBadge: "Dispositivi Hardware & Edge",
+        bannerTitle: "Catalogo Hardware & Sicurezza",
+        bannerDesc: "Esplora i dispositivi enterprise, aggiungi articoli al carrello e osserva il comportamento degli eventi DataLayer tramite DevTools o Tag Assistant.",
+        productsTitle: "Dispositivi Disponibili",
+        btnDetails: "Dettaglio",
+        btnAdd: "Aggiungi",
+        contactTitle: "Consulenza Tecnica Enterprise",
+        contactDesc: "Invia una richiesta tecnica per simulare il flusso di acquisizione lead.",
+        firstName: "Nome",
+        lastName: "Cognome",
+        corpEmail: "Email Aziendale",
+        phone: "Numero di Telefono",
+        postalCode: "Codice Postale (CAP)",
+        city: "Città",
+        country: "Paese",
+        techRequest: "Ambito del Deployment",
+        requestPlaceholder: "Descrivi l'architettura cluster e i requisiti di sicurezza...",
+        btnSendLead: "Invia Richiesta",
+        checkoutTitle: "Carrello & Checkout",
+        checkoutDesc: "Completa le fasi del checkout per simulare le conversioni transazionali.",
+        backToCatalog: "← Torna al catalogo",
+        step1Title: "Dati di Spedizione & Acquirente",
+        step1BadgeWaiting: "In attesa",
+        step1BadgeDone: "✓ Registrato",
+        fullName: "Nome e Cognome",
+        btnConfirmStep1: "Conferma Dati Spedizione (Step 1)",
+        step2Title: "Metodo di Pagamento & Acquisto",
+        corpInvoiceTitle: "Fatturazione Corporate Google",
+        corpInvoiceDesc: "Account Tech Solutions pre-autorizzato",
+        corpInvoiceStatus: "Attivo",
+        btnPay: "Paga e Completa Ordine",
+        orderSummary: "Riepilogo Ordine",
+        subtotal: "Subtotale",
+        shipping: "Spedizione Rapida",
+        freeShipping: "Inclusa",
+        total: "Totale",
+        emptyCart: "Il carrello è attualmente vuoto.",
+        orderConfirmedTitle: "Ordine Ricevuto con Successo",
+        orderConfirmedDesc: "La notifica di conferma e i documenti di spedizione sono stati generati.",
+        leadConfirmedTitle: "Richiesta Ricevuta",
+        leadConfirmedDesc: "Un Solution Architect esaminerà i parametri inviati.",
+        btnReturnStore: "Torna al Negozio",
+        addedToast: "Prodotto aggiunto al carrello",
+        drawerTitle: "Obiettivi del Training",
+        drawerSubtitle: "Checklist di Configurazione Tag in GTM",
+        progressText: "Completati",
+        obj1Title: "Obiettivo 1: Tag di Acquisto E-commerce & Conversione",
+        obj1Desc: "Configura un tag di transazione e-commerce in Tag Manager che recuperi valore, valuta, ID transazione, l'elenco degli articoli acquistati e l'email dell'acquirente per le Enhanced Conversions. Ispeziona la sequenza temporale e il redirect per identificare su quale evento DataLayer attivare il tag.",
+        obj2Title: "Obiettivo 2: Tag Invio Modulo Lead",
+        obj2Desc: "Configura un tag per intercettare l'invio del form di consulenza. Crea le variabili Data Layer necessarie per estrarre i dati dell'utente (email, telefono, CAP e città) direttamente dal payload dell'invio usando la corretta dot notation.",
+        obj3Title: "Obiettivo 3: Tag Remarketing Dinamico Retail",
+        obj3Desc: "Implementa un tag di Remarketing Dinamico Google Ads per il verticale Retail. Verifica che il tag legga dal DataLayer l'identificativo di catalogo e gli articoli esaminati dagli utenti nelle schede prodotto e nel carrello.",
+        obj4Title: "Obiettivo 4: Estrazione Proprietà Enterprise Annidata",
+        obj4Desc: "Il payload generato durante il checkout contiene una struttura di fatturazione enterprise fortemente nidificata. Usa i DevTools del browser e le API DataLayer per individuare ed estrarre il codice hash del certificato di conformità di sicurezza.",
+        guidanceNoticeTitle: "Nota per i Trainee",
+        guidanceNoticeBody: "In questa schermata non sono presenti nomi di eventi né percorsi di variabili. Devi utilizzare Chrome DevTools (Console / Rete) o Google Tag Assistant per analizzare i push del DataLayer e impostare le configurazioni in GTM.",
+        footerText: "Google Technical Solutions Training Sandbox • Hardware & Cloud Store"
+      },
+      de: {
+        brandSub: "Hardware & Cloud-Infrastruktur",
+        navCatalog: "Katalog",
+        navContact: "Kontakt",
+        navCart: "Warenkorb",
+        briefBtn: "Schulungsziele",
+        bannerBadge: "Hardware & Edge-Geräte",
+        bannerTitle: "Geräte- & Sicherheitskatalog",
+        bannerDesc: "Entdecken Sie Unternehmensgeräte, fügen Sie Artikel zum Warenkorb hinzu und analysieren Sie DataLayer-Ereignisse in DevTools oder Tag Assistant.",
+        productsTitle: "Verfügbare Geräte",
+        btnDetails: "Details",
+        btnAdd: "Hinzufügen",
+        contactTitle: "Technische Unternehmensberatung",
+        contactDesc: "Senden Sie eine Anfrage, um den Lead-Generierungs-Flow zu simulieren.",
+        firstName: "Vorname",
+        lastName: "Nachname",
+        corpEmail: "Geschäftliche E-Mail",
+        phone: "Telefonnummer",
+        postalCode: "Postleitzahl",
+        city: "Stadt",
+        country: "Land",
+        techRequest: "Deployment-Umfang",
+        requestPlaceholder: "Beschreiben Sie Ihre Architektur- und Sicherheitsanforderungen...",
+        btnSendLead: "Anfrage Absenden",
+        checkoutTitle: "Warenkorb & Kasse",
+        checkoutDesc: "Schließen Sie die Checkout-Schritte ab, um Conversion-Ereignisse zu simulieren.",
+        backToCatalog: "← Zurück zum Katalog",
+        step1Title: "Versand- & Käuferdaten",
+        step1BadgeWaiting: "Ausstehend",
+        step1BadgeDone: "✓ Erfasst",
+        fullName: "Vollständiger Name",
+        btnConfirmStep1: "Versanddaten bestätigen (Schritt 1)",
+        step2Title: "Zahlungsmethode & Abschluss",
+        corpInvoiceTitle: "Google Unternehmensabrechnung",
+        corpInvoiceDesc: "Vorab autorisiertes Tech Solutions Konto",
+        corpInvoiceStatus: "Aktiv",
+        btnPay: "Bezahlen & Bestellung Abschließen",
+        orderSummary: "Bestellübersicht",
+        subtotal: "Zwischensumme",
+        shipping: "Expressversand",
+        freeShipping: "Inbegriffen",
+        total: "Gesamtsumme",
+        emptyCart: "Ihr Warenkorb ist derzeit leer.",
+        orderConfirmedTitle: "Bestellung Erfolgreich Übermittelt",
+        orderConfirmedDesc: "Auftragsbestätigung und Versanddaten wurden erstellt.",
+        leadConfirmedTitle: "Anfrage Erhalten",
+        leadConfirmedDesc: "Ein Solution Architect wird die Parameter prüfen.",
+        btnReturnStore: "Zurück zum Shop",
+        addedToast: "Artikel zum Warenkorb hinzugefügt",
+        drawerTitle: "Schulungsziele",
+        drawerSubtitle: "GTM-Tag-Implementierungs-Checkliste",
+        progressText: "Abgeschlossen",
+        obj1Title: "Ziel 1: E-Commerce-Kauf- & Conversion-Tag",
+        obj1Desc: "Richten Sie ein E-Commerce-Transaktions-Tag in GTM ein, das Transaktionswert, Währung, Transaktions-ID, die Produktliste sowie die Käufer-E-Mail für erweiterte Conversions erfasst. Analysieren Sie das Timing und den Redirect-Zyklus, um den optimalen Trigger zu wählen.",
+        obj2Title: "Ziel 2: Lead-Formular-Tag",
+        obj2Desc: "Konfigurieren Sie ein Tag zum Erfassen von Formularübermittlungen. Erstellen Sie DataLayer-Variablen, um Kontaktdaten (E-Mail, Telefon, PLZ und Stadt) über Dot-Notation direkt aus dem Payload abzurufen.",
+        obj3Title: "Ziel 3: Retail Dynamic Remarketing Tag",
+        obj3Desc: "Implementieren Sie ein Google Ads Dynamic Remarketing Tag für den Einzelhandel (Retail). Stellen Sie sicher, dass das Tag Produkt-IDs und Katalogdaten aus dem DataLayer liest, wenn Nutzer Artikel ansehen.",
+        obj4Title: "Ziel 4: Tief Verschachtelte Enterprise-Eigenschaft",
+        obj4Desc: "Der Checkout-Payload enthält eine tief verschachtelte Unternehmens-Abrechnungsstruktur. Nutzen Sie die DevTools und die DataLayer-API, um den Hash des Sicherheitszertifikats effizient zu ermitteln.",
+        guidanceNoticeTitle: "Hinweis für Schulungsteilnehmer",
+        guidanceNoticeBody: "Variablennamen und Ereignis-Trigger werden hier bewusst nicht genannt. Öffnen Sie die Chrome DevTools oder den Google Tag Assistant, um die DataLayer-Pushes zu untersuchen.",
+        footerText: "Google Technical Solutions Training Sandbox • Hardware & Cloud Store"
+      },
+      es: {
+        brandSub: "Hardware e Infraestructura Cloud",
+        navCatalog: "Catálogo",
+        navContact: "Contacto",
+        navCart: "Carrito",
+        briefBtn: "Objetivos de Formación",
+        bannerBadge: "Dispositivos Hardware & Edge",
+        bannerTitle: "Catálogo de Hardware y Seguridad",
+        bannerDesc: "Explore dispositivos empresariales, agregue productos al carrito y analice los eventos DataLayer en DevTools o Tag Assistant.",
+        productsTitle: "Equipamiento Disponible",
+        btnDetails: "Detalles",
+        btnAdd: "Añadir",
+        contactTitle: "Asesoría Técnica Enterprise",
+        contactDesc: "Envíe su solicitud para simular la generación de leads empresariales.",
+        firstName: "Nombre",
+        lastName: "Apellidos",
+        corpEmail: "Correo Corporativo",
+        phone: "Número de Teléfono",
+        postalCode: "Código Postal",
+        city: "Ciudad",
+        country: "País",
+        techRequest: "Alcance del Proyecto",
+        requestPlaceholder: "Describa su arquitectura y necesidades de seguridad...",
+        btnSendLead: "Enviar Solicitud",
+        checkoutTitle: "Carrito & Pasarela",
+        checkoutDesc: "Complete las fases de compra para simular eventos de conversión.",
+        backToCatalog: "← Volver al catálogo",
+        step1Title: "Datos de Envío y Comprador",
+        step1BadgeWaiting: "Pendiente",
+        step1BadgeDone: "✓ Registrado",
+        fullName: "Nombre y Apellidos",
+        btnConfirmStep1: "Confirmar Datos de Envío (Paso 1)",
+        step2Title: "Método de Pago y Compra",
+        corpInvoiceTitle: "Facturación Corporativa Google",
+        corpInvoiceDesc: "Cuenta autorizada de Tech Solutions",
+        corpInvoiceStatus: "Activo",
+        btnPay: "Pagar y Completar Pedido",
+        orderSummary: "Resumen del Pedido",
+        subtotal: "Subtotal",
+        shipping: "Envío Express",
+        freeShipping: "Incluido",
+        total: "Total",
+        emptyCart: "Su carrito está actualmente vacío.",
+        orderConfirmedTitle: "Pedido Recibido con Éxito",
+        orderConfirmedDesc: "La confirmación y los datos de envío han sido procesados.",
+        leadConfirmedTitle: "Solicitud Recibida",
+        leadConfirmedDesc: "Un arquitecto de soluciones revisará los parámetros enviados.",
+        btnReturnStore: "Volver a la Tienda",
+        addedToast: "Producto añadido al carrito",
+        drawerTitle: "Objetivos de Formación",
+        drawerSubtitle: "Checklist de Configuración de Tags en GTM",
+        progressText: "Completados",
+        obj1Title: "Objetivo 1: Tag de Compra E-commerce y Conversión",
+        obj1Desc: "Configure una etiqueta de transacción e-commerce en Tag Manager que recopile valor, moneda, ID de transacción, lista de artículos y el email del cliente para conversiones avanzadas. Evalúe el ciclo de redirección para seleccionar el trigger adecuado.",
+        obj2Title: "Objetivo 2: Tag de Envío de Formulario Lead",
+        obj2Desc: "Configure una etiqueta para registrar el envío del formulario. Cree variables Data Layer para extraer la información de contacto (email, teléfono, código postal y ciudad) mediante dot notation.",
+        obj3Title: "Objetivo 3: Tag de Remarketing Dinámico Retail",
+        obj3Desc: "Implemente una etiqueta de Google Ads Dynamic Remarketing para Retail. Verifique que lea los identificadores de producto y datos del catálogo desde el DataLayer en vistas de producto y carrito.",
+        obj4Title: "Objetivo 4: Extracción de Propiedades Enterprise Profundas",
+        obj4Desc: "El payload generado durante el checkout contiene una estructura empresarial profundamente anidada. Use las DevTools y la API de DataLayer para localizar y extraer el hash de certificado de seguridad.",
+        guidanceNoticeTitle: "Aviso de Formación",
+        guidanceNoticeBody: "No se muestran nombres de variables ni triggers en este panel. Debe abrir Chrome DevTools o Google Tag Assistant para inspeccionar el DataLayer y deducir la configuración técnica.",
+        footerText: "Google Technical Solutions Training Sandbox • Hardware & Cloud Store"
+      },
+      nl: {
+        brandSub: "Hardware & Cloudinfrastructuur",
+        navCatalog: "Catalogus",
+        navContact: "Contact",
+        navCart: "Winkelwagen",
+        briefBtn: "Trainingsdoelen",
+        bannerBadge: "Hardware & Edge-apparaten",
+        bannerTitle: "Apparatuur & Beveiligingscatalogus",
+        bannerDesc: "Ontdek enterprise hardware, voeg artikelen toe aan de winkelwagen en analyseer DataLayer-gebeurtenissen via DevTools of Tag Assistant.",
+        productsTitle: "Beschikbare Apparatuur",
+        btnDetails: "Details",
+        btnAdd: "Toevoegen",
+        contactTitle: "Technisch Bedrijfsadvies",
+        contactDesc: "Dien een adviesaanvraag in om lead capture flows te simuleren.",
+        firstName: "Voornaam",
+        lastName: "Achternaam",
+        corpEmail: "Zakelijk E-mailadres",
+        phone: "Telefoonnummer",
+        postalCode: "Postcode",
+        city: "Plaats",
+        country: "Land",
+        techRequest: "Projectbeschrijving",
+        requestPlaceholder: "Beschrijf uw cluster- en beveiligingsvereisten...",
+        btnSendLead: "Aanvraag Verzenden",
+        checkoutTitle: "Winkelwagen & Kassa",
+        checkoutDesc: "Doorloop de checkout om transactionele gebeurtenissen te simuleren.",
+        backToCatalog: "← Terug naar catalogus",
+        step1Title: "Verzend- & Kopergegevens",
+        step1BadgeWaiting: "In afwachting",
+        step1BadgeDone: "✓ Opgeslagen",
+        fullName: "Volledige Naam",
+        btnConfirmStep1: "Verzendgegevens bevestigen (Stap 1)",
+        step2Title: "Betaalmethode & Afronding",
+        corpInvoiceTitle: "Google Bedrijfsfacturatie",
+        corpInvoiceDesc: "Geautoriseerd Tech Solutions Account",
+        corpInvoiceStatus: "Actief",
+        btnPay: "Betalen & Bestelling Voltooien",
+        orderSummary: "Besteloverzicht",
+        subtotal: "Subtotaal",
+        shipping: "Expresslevering",
+        freeShipping: "Inbegrepen",
+        total: "Totaal",
+        emptyCart: "Uw winkelwagen is momenteel leeg.",
+        orderConfirmedTitle: "Bestelling Succesvol Verwerkt",
+        orderConfirmedDesc: "Bevestigingsdetails en logistieke manifesten zijn aangemaakt.",
+        leadConfirmedTitle: "Aanvraag Ontvangen",
+        leadConfirmedDesc: "Een Solution Architect zal de ingediende parameters evalueren.",
+        btnReturnStore: "Terug naar Winkel",
+        addedToast: "Artikel toegevoegd aan winkelwagen",
+        drawerTitle: "Trainingsdoelen",
+        drawerSubtitle: "Checklist voor GTM-tagimplementatie",
+        progressText: "Voltooid",
+        obj1Title: "Doel 1: E-commerce Aankoop- & Conversietag",
+        obj1Desc: "Configureer een e-commerce aankooptag in Tag Manager die transactiewaarde, valuta, transactie-ID, productitems en het koperse-mailadres voor Enhanced Conversions uitleest. Evalueer de paginacyclus en omleiding om het juiste triggermoment te bepalen.",
+        obj2Title: "Doel 2: Leadformulier Verzendingstag",
+        obj2Desc: "Stel een tag in voor formulierinzendingen. Maak Data Layer variabelen aan om contactgegevens (e-mail, telefoonnummer, postcode en plaats) via dot-notatie rechtstreeks uit het verzendingspayload te halen.",
+        obj3Title: "Doel 3: Retail Dynamische Remarketingtag",
+        obj3Desc: "Implementeer een Google Ads Dynamic Remarketing tag voor de retailsector. Zorg dat de tag de artikel-ID's en catalogusparameters uit de DataLayer ophaalt bij productweergaves en in de winkelwagen.",
+        obj4Title: "Doel 4: Diep Geneste Enterprise Eigenschap",
+        obj4Desc: "Het transactiepayload bevat een diep geneste bedrijfsfacturatiestructuur. Gebruik browser DevTools en de DataLayer API om de hash van het beveiligingscertificaat te identificeren en uit te lezen.",
+        guidanceNoticeTitle: "Instructie voor Cursisten",
+        guidanceNoticeBody: "In dit overzicht worden bewust geen variabelenamen of triggergebeurtenissen getoond. Gebruik Chrome DevTools of Google Tag Assistant om de DataLayer te inspecteren en uw GTM-configuratie op te bouwen.",
+        footerText: "Google Technical Solutions Training Sandbox • Hardware & Cloud Store"
+      }
+    };
+
+    let currentLang = 'en';
+
+    // State Variables
+    let cart = [];
+    let buyerData = null;
+    let completedObjectives = {
+      obj1: false,
+      obj2: false,
+      obj3: false,
+      obj4: false
+    };
+
+    // Product Catalog definition
+    const PRODUCTS = [
+      {
+        id: 'MC_RETAIL_101',
+        name: 'Google Coral USB Edge Accelerator',
+        category: 'Edge TPU Hardware',
+        price: 59.99,
+        google_business_vertical: 'retail',
+        desc: 'ML coprocessor delivering 4 TOPS via Edge TPU. Executes local TensorFlow Lite inference with ultra-low latency and zero cloud dependency.',
+        icon: 'cpu'
+      },
+      {
+        id: 'MC_RETAIL_202',
+        name: 'Titan Security Key Bundle (USB-C / NFC)',
+        category: 'Zero Trust Security',
+        price: 35.00,
+        google_business_vertical: 'retail',
+        desc: 'FIDO2 certified hardware security keys protecting infrastructure accounts against phishing, session hijacking, and MITM intrusions.',
+        icon: 'key-round'
+      },
+      {
+        id: 'MC_RETAIL_303',
+        name: 'Nest Hub Max - Enterprise Workspace',
+        category: 'Smart Display & Monitoring',
+        price: 229.00,
+        google_business_vertical: 'retail',
+        desc: '10" HD smart touchscreen console tailored for cloud telemetry monitoring, secure enterprise video calls, and ambient alerts.',
+        icon: 'monitor'
+      },
+      {
+        id: 'MC_RETAIL_404',
+        name: 'Google Pixel Fold - Technical Edition',
+        category: 'Mobile Workstations',
+        price: 1899.00,
+        google_business_vertical: 'retail',
+        desc: 'Dual-display foldable system powered by Google Tensor G3 for cross-platform debugging, remote infrastructure operations, and field telemetry.',
+        icon: 'smartphone'
+      }
+    ];
+
+    // Initialize default cart item
+    cart = [{ product: PRODUCTS[0], quantity: 1 }];
+  </script>
+
+  <!-- Top Store Header -->
+  <header class="sticky top-0 z-40 store-card border-b backdrop-blur-md bg-opacity-95">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16 gap-3 sm:gap-4">
+        
+        <!-- Store Brand -->
+        <a href="#/dataLayer-playground" class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-xs">
+            G
+          </div>
+          <div>
+            <span class="font-semibold text-sm tracking-tight block">Google Tech Solutions</span>
+            <span id="txtBrandSub" class="text-[11px] block hidden sm:inline" style="color: var(--text-muted);">Hardware & Cloud Infrastructure</span>
+          </div>
+        </a>
+
+        <!-- Store Navigation -->
+        <nav class="flex items-center gap-1 sm:gap-2 text-xs font-medium">
+          <a 
+            id="navStore" 
+            href="#/dataLayer-playground" 
+            class="px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 transition"
+          >
+            Catalog
+          </a>
+          <a 
+            id="navContact" 
+            href="#/dataLayer-playground/contact" 
+            class="px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 transition"
+          >
+            Contact
+          </a>
+          <a 
+            id="navCart" 
+            href="#/dataLayer-playground/checkout" 
+            class="relative px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 flex items-center gap-1.5 transition"
+          >
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span id="txtNavCart" class="hidden md:inline">Cart</span>
+            <span id="cartCountBadge" class="w-4 h-4 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center transition-transform duration-200">1</span>
+          </a>
+        </nav>
+
+        <!-- Right Side: Language Switcher & Objectives Drawer Trigger -->
+        <div class="flex items-center gap-2">
+          
+          <!-- Language Selector -->
+          <div class="relative inline-flex items-center">
+            <i data-lucide="globe" class="w-3.5 h-3.5 absolute left-2 text-slate-400 pointer-events-none"></i>
+            <select 
+              id="langSelect" 
+              onchange="changeLanguage(this.value)" 
+              aria-label="Select Language"
+              class="store-input text-[11px] font-medium pl-7 pr-2 py-1.5 rounded-lg cursor-pointer appearance-none bg-transparent"
+            >
+              <option value="en">EN</option>
+              <option value="it">IT</option>
+              <option value="de">DE</option>
+              <option value="es">ES</option>
+              <option value="nl">NL</option>
+            </select>
+          </div>
+
+          <!-- Training Objectives Drawer Trigger -->
+          <button 
+            type="button"
+            onclick="toggleObjectivesDrawer()" 
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-medium shadow-xs transition hover:border-blue-500 cursor-pointer"
+            style="border-color: var(--border-subtle); background-color: var(--bg-surface);"
+          >
+            <i data-lucide="target" class="w-4 h-4 text-blue-500"></i>
+            <span id="txtBriefBtn" class="hidden sm:inline">Training Objectives</span>
+            <span id="progressPill" class="text-[11px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold">0/4</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewports Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+    
+    <!-- VIEW: CATALOG (ROUTE: #/dataLayer-playground) -->
+    <div id="routeCatalog" class="space-y-8">
+      
+      <!-- Store Hero Banner -->
+      <div class="store-card rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xs">
+        <div class="space-y-2 max-w-xl">
+          <span id="txtBannerBadge" class="px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-blue-500/10 text-blue-600 dark:text-blue-400">
+            Hardware & Edge Devices
+          </span>
+          <h1 id="txtBannerTitle" class="text-2xl sm:text-3xl font-bold tracking-tight">Device & Security Catalog</h1>
+          <p id="txtBannerDesc" class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);">
+            Explore enterprise hardware items, add devices to cart, and observe DataLayer event behaviors in DevTools or Tag Assistant.
+          </p>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 id="txtProductsTitle" class="text-xs font-bold uppercase tracking-wider text-slate-500">Available Equipment</h2>
+        </div>
+        
+        <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIEW: CONTACT FORM (ROUTE: #/dataLayer-playground/contact) -->
+    <div id="routeContact" class="hidden max-w-2xl mx-auto space-y-6">
+      <div class="text-center space-y-1.5">
+        <h1 id="txtContactTitle" class="text-2xl font-bold tracking-tight">Enterprise Technical Advisory</h1>
+        <p id="txtContactDesc" class="text-xs" style="color: var(--text-muted);">Submit your technical request to simulate a lead generation flow.</p>
+      </div>
+
+      <div class="store-card rounded-2xl p-6 shadow-xs space-y-4">
+        <form onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label id="lblFirstName" class="block font-medium mb-1" style="color: var(--text-muted);">First Name</label>
+              <input type="text" id="leadFirstName" required value="Federico" class="store-input w-full px-3 py-2 rounded-lg text-xs" />
+            </div>
+            <div>
+              <label id="lblLastName" class="block font-medium mb-1" style="color: var(--text-muted);">Last Name</label>
+              <input type="text" id="leadLastName" required value="Moretti" class="store-input w-full px-3 py-2 rounded-lg text-xs" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label id="lblCorpEmail" class="block font-medium mb-1" style="color: var(--text-muted);">Corporate Email</label>
+              <input type="email" id="leadEmail" required value="federico.moretti@telecom-tech.it" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs" />
+            </div>
+            <div>
+              <label id="lblPhone" class="block font-medium mb-1" style="color: var(--text-muted);">Phone Number</label>
+              <input type="tel" id="leadPhone" required value="+390299887766" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label id="lblPostalCode" class="block font-medium mb-1" style="color: var(--text-muted);">Postal Code</label>
+              <input type="text" id="leadZip" required value="00185" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs font-semibold" />
+            </div>
+            <div>
+              <label id="lblCity" class="block font-medium mb-1" style="color: var(--text-muted);">City</label>
+              <input type="text" id="leadCity" required value="Roma" class="store-input w-full px-3 py-2 rounded-lg text-xs" />
+            </div>
+            <div>
+              <label id="lblCountry" class="block font-medium mb-1" style="color: var(--text-muted);">Country</label>
+              <input type="text" id="leadCountry" required value="IT" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs" />
+            </div>
+          </div>
+
+          <div>
+            <label id="lblTechRequest" class="block font-medium mb-1" style="color: var(--text-muted);">Technical Deployment Scope</label>
+            <textarea id="txtDeploymentScope" rows="3" class="store-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Describe your cluster architecture and security needs..."></textarea>
+          </div>
+
+          <div class="pt-2 flex justify-end">
+            <button 
+              type="submit" 
+              class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-2 shadow-xs transition cursor-pointer"
+            >
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span id="btnSendLead">Submit Advisory Request</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- VIEW: CHECKOUT (ROUTE: #/dataLayer-playground/checkout) -->
+    <div id="routeCheckout" class="hidden space-y-6 max-w-4xl mx-auto">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 id="txtCheckoutTitle" class="text-2xl font-bold tracking-tight">Cart & Checkout</h1>
+          <p id="txtCheckoutDesc" class="text-xs" style="color: var(--text-muted);">Complete checkout stages to simulate transactional conversions.</p>
+        </div>
+        <a id="txtBackToCatalog" href="#/dataLayer-playground" class="text-xs text-blue-600 hover:underline">← Back to catalog</a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left: Steps -->
+        <div class="lg:col-span-2 space-y-4">
+          
+          <!-- Step 1: User Details -->
+          <div class="store-card rounded-2xl p-5 shadow-xs space-y-4">
+            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">1</span>
+                <h3 id="txtStep1Title" class="font-semibold text-sm">Shipping & Buyer Information</h3>
+              </div>
+              <span id="step1StatusBadge" class="text-[11px] font-mono text-amber-500 font-medium">Pending</span>
+            </div>
+
+            <form id="checkoutStep1Form" onsubmit="handleCheckoutStep1(event)" class="space-y-3 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label id="lblFullName" class="block font-medium mb-1" style="color: var(--text-muted);">Full Name</label>
+                  <input type="text" id="buyerName" required value="Laura De Angelis" class="store-input w-full px-3 py-2 rounded-lg text-xs" />
+                </div>
+                <div>
+                  <label id="lblBuyerEmail" class="block font-medium mb-1" style="color: var(--text-muted);">Corporate Email</label>
+                  <input type="email" id="buyerEmail" required value="laura.deangelis@corpcloud.com" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label id="lblBuyerPhone" class="block font-medium mb-1" style="color: var(--text-muted);">Phone Number</label>
+                  <input type="tel" id="buyerPhone" required value="+393339081234" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs" />
+                </div>
+                <div>
+                  <label id="lblBuyerZip" class="block font-medium mb-1" style="color: var(--text-muted);">Postal Code</label>
+                  <input type="text" id="buyerZip" required value="20121" class="store-input w-full px-3 py-2 rounded-lg font-mono text-xs font-semibold" />
+                </div>
+                <div>
+                  <label id="lblBuyerCity" class="block font-medium mb-1" style="color: var(--text-muted);">City</label>
+                  <input type="text" id="buyerCity" required value="Milano" class="store-input w-full px-3 py-2 rounded-lg text-xs" />
+                </div>
+              </div>
+
+              <div class="pt-2 flex justify-end">
+                <button 
+                  type="submit" 
+                  class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer"
+                >
+                  <span id="btnConfirmStep1">Confirm Shipping Details (Step 1)</span>
+                  <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Payment and Submit -->
+          <div id="checkoutStep2Box" class="store-card rounded-2xl p-5 shadow-xs space-y-4 opacity-50 pointer-events-none transition-all">
+            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-slate-300 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs" id="step2Badge">2</span>
+                <h3 id="txtStep2Title" class="font-semibold text-sm">Payment Method & Purchase</h3>
+              </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3 rounded-xl store-subtle flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+                    <i data-lucide="credit-card" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <span id="txtCorpInvoiceTitle" class="font-semibold block">Google Corporate Invoicing</span>
+                    <span id="txtCorpInvoiceDesc" class="text-[11px] text-slate-400">Pre-authorized Tech Solutions Account</span>
+                  </div>
+                </div>
+                <span id="txtCorpInvoiceStatus" class="text-[11px] font-mono text-emerald-500 font-semibold">Active</span>
+              </div>
+
+              <button 
+                type="button" 
+                onclick="executePurchaseAndRedirect()" 
+                class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition cursor-pointer"
+              >
+                <i data-lucide="lock" class="w-4 h-4"></i>
+                <span><span id="btnPayText">Pay & Complete Order</span> (€<span id="btnTotalDisplay">59.99</span>)</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="space-y-4">
+          <div class="store-card rounded-2xl p-5 shadow-xs space-y-4">
+            <h3 id="txtOrderSummary" class="font-bold text-xs tracking-tight uppercase" style="color: var(--text-muted);">Order Summary</h3>
+            <div id="cartSummaryList" class="space-y-3 text-xs">
+              <!-- Populated by JS -->
+            </div>
+
+            <div class="border-t pt-3 space-y-1.5 text-xs" style="border-color: var(--border-color);">
+              <div class="flex justify-between" style="color: var(--text-muted);">
+                <span id="txtSubtotal">Subtotal</span>
+                <span class="font-mono">€<span id="subtotalDisplay">0.00</span></span>
+              </div>
+              <div class="flex justify-between" style="color: var(--text-muted);">
+                <span id="txtShipping">Express Logistics</span>
+                <span id="txtFreeShipping" class="font-mono text-emerald-600 dark:text-emerald-400">Included</span>
+              </div>
+              <div class="flex justify-between font-bold text-sm pt-2 border-t" style="border-color: var(--border-color);">
+                <span id="txtTotal">Total</span>
+                <span class="font-mono text-blue-600 dark:text-blue-400">€<span id="grandTotalDisplay">0.00</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW: ORDER CONFIRMED (ROUTE: #/dataLayer-playground/order-confirmed) -->
+    <div id="routeOrderConfirmed" class="hidden max-w-xl mx-auto space-y-6">
+      <div class="store-card rounded-2xl p-8 text-center space-y-5 shadow-xs">
+        <div class="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center">
+          <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-1">
+          <h1 id="txtOrderConfirmedTitle" class="text-2xl font-bold tracking-tight">Order Successfully Processed</h1>
+          <p class="text-xs font-mono text-slate-400" id="thankyouTxDisplay">Transaction Reference: TX_982341</p>
+        </div>
+
+        <p id="txtOrderConfirmedDesc" class="text-xs leading-relaxed" style="color: var(--text-muted);">
+          A confirmation dispatch and telemetry manifests have been routed.
+        </p>
+
+        <a 
+          href="#/dataLayer-playground" 
+          class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs inline-flex items-center gap-2 transition shadow-xs"
+        >
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span id="btnReturnStore1">Return to Store</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- VIEW: CONTACT CONFIRMED (ROUTE: #/dataLayer-playground/thank-you) -->
+    <div id="routeContactThankYou" class="hidden max-w-xl mx-auto space-y-6">
+      <div class="store-card rounded-2xl p-8 text-center space-y-5 shadow-xs">
+        <div class="w-14 h-14 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center">
+          <i data-lucide="mail-check" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-1">
+          <h1 id="txtLeadConfirmedTitle" class="text-2xl font-bold tracking-tight">Request Received</h1>
+          <p id="txtLeadConfirmedDesc" class="text-xs" style="color: var(--text-muted);">A Technical Solution Architect will review the parameters shortly.</p>
+        </div>
+
+        <a 
+          href="#/dataLayer-playground" 
+          class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs inline-flex items-center gap-2 transition shadow-xs"
+        >
+          <span id="btnReturnStore2">Return to Store</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: Product Detail (Triggers dynamic remarketing view_item) -->
+  <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs hidden">
+    <div class="store-card w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-5 relative">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-slate-500/10 transition cursor-pointer">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-[11px] font-mono">
+          <span class="text-blue-600 dark:text-blue-400 font-semibold" id="modalCategory">Edge Computing</span>
+          <span class="text-slate-400">•</span>
+          <span class="text-amber-500 font-semibold" id="modalId">MC_RETAIL_101</span>
+        </div>
+        <h3 class="text-lg font-bold tracking-tight" id="modalTitle">Google Coral Accelerator</h3>
+        <p class="text-xs leading-relaxed" style="color: var(--text-muted);" id="modalDescription"></p>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t" style="border-color: var(--border-color);">
+        <div class="text-base font-bold font-mono" id="modalPrice">€59.99</div>
+        <div class="flex items-center gap-2">
+          <button 
+            id="modalAddCartBtn"
+            class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer"
+          >
+            <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+            <span id="txtModalAdd">Add</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Store Footer -->
+  <footer class="mt-auto border-t store-card" style="border-color: var(--border-color);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style="color: var(--text-muted);">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-700 dark:text-slate-300">Google Technical Solutions Training Store</span>
+        <span>•</span>
+        <span id="txtFooterEnv">Hardware & Cloud Store</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] font-mono">
+        <span>GTM Technical Playground</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Feedback -->
+  <div 
+    id="cartToast" 
+    class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 pointer-events-none transition-all duration-300 store-card rounded-xl px-4 py-3 shadow-xl flex items-center gap-3 border" 
+    style="border-color: var(--border-color);"
+  >
+    <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+      <i data-lucide="check" class="w-4 h-4"></i>
+    </div>
+    <div class="pr-2">
+      <span id="txtToastMain" class="font-semibold text-xs block text-slate-900 dark:text-slate-100">Item added to cart</span>
+      <span class="text-[11px] block truncate max-w-[200px]" style="color: var(--text-muted);" id="toastProductName">Selected device</span>
+    </div>
+  </div>
+
+  <!-- COLLAPSIBLE TRAINING OBJECTIVES DRAWER (NO SPOILERS / NO ANSWER CHEATS) -->
+  <aside 
+    id="objectivesDrawer" 
+    class="fixed inset-y-0 right-0 z-50 w-full sm:w-[500px] store-card border-l shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out"
+  >
+    <!-- Drawer Header -->
+    <div class="p-4 border-b flex items-center justify-between" style="border-color: var(--border-color);">
+      <div>
+        <h3 id="txtDrawerTitle" class="font-bold text-xs tracking-tight uppercase flex items-center gap-2">
+          <i data-lucide="target" class="w-4 h-4 text-blue-500"></i>
+          <span>Training Objectives</span>
+        </h3>
+        <p id="txtDrawerSubtitle" class="text-[11px]" style="color: var(--text-muted);">GTM Tag Implementation Checklist</p>
+      </div>
+      <button onclick="toggleObjectivesDrawer()" class="p-1 rounded hover:bg-slate-500/10 transition cursor-pointer">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Progress Meter -->
+    <div class="px-4 py-3 border-b store-subtle space-y-1.5" style="border-color: var(--border-color);">
+      <div class="flex items-center justify-between text-xs font-semibold">
+        <span class="text-[11px] uppercase tracking-wider text-slate-500 font-mono">Progress</span>
+        <span id="drawerProgressText" class="font-mono text-blue-600 dark:text-blue-400">0 of 4 Completed</span>
+      </div>
+      <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+        <div id="drawerProgressBar" class="bg-blue-600 h-full rounded-full transition-all duration-300 w-0"></div>
+      </div>
+    </div>
+
+    <!-- Objectives List -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
+      
+      <!-- Trainer Notice -->
+      <div class="p-3 rounded-xl border border-blue-500/20 bg-blue-500/5 space-y-1 text-slate-700 dark:text-slate-300">
+        <div class="flex items-center gap-1.5 font-semibold text-blue-600 dark:text-blue-400 text-xs">
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i>
+          <span id="txtNoticeTitle">Trainer Notice</span>
+        </div>
+        <p id="txtNoticeBody" class="text-[11px] leading-relaxed">
+          No variable names or event triggers are shown here. You must open Chrome DevTools (Console / Network) or Google Tag Assistant to inspect the DataLayer pushes and formulate your GTM configurations.
+        </p>
+      </div>
+
+      <!-- Objective 1: Purchase & Conversion -->
+      <div class="store-card rounded-xl p-4 space-y-3 transition border" id="cardObj1">
+        <div class="flex items-start justify-between gap-3">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input 
+              type="checkbox" 
+              id="chkObj1" 
+              onchange="toggleObjective('obj1', this.checked)" 
+              class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer"
+            >
+            <div>
+              <span id="txtObj1Title" class="font-bold text-xs block text-slate-900 dark:text-slate-100">
+                Objective 1: E-commerce Purchase & Conversion Tag
+              </span>
+              <p id="txtObj1Desc" class="text-[11px] leading-relaxed mt-1" style="color: var(--text-muted);">
+                Configure an e-commerce transaction tag in Tag Manager that collects transaction value, currency, transaction ID, the list of purchased items, and customer email for Enhanced Conversions. Inspect the network timing and page redirect lifecycle to determine which DataLayer event trigger should fire this tag.
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Objective 2: Lead Form -->
+      <div class="store-card rounded-xl p-4 space-y-3 transition border" id="cardObj2">
+        <div class="flex items-start justify-between gap-3">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input 
+              type="checkbox" 
+              id="chkObj2" 
+              onchange="toggleObjective('obj2', this.checked)" 
+              class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer"
+            >
+            <div>
+              <span id="txtObj2Title" class="font-bold text-xs block text-slate-900 dark:text-slate-100">
+                Objective 2: Lead Generation Form Tag
+              </span>
+              <p id="txtObj2Desc" class="text-[11px] leading-relaxed mt-1" style="color: var(--text-muted);">
+                Set up a tag to capture consultation form submissions. Build Data Layer variables to retrieve contact details (email, phone, postal code, and city) directly from the form submission payload using appropriate dot notation.
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Objective 3: Dynamic Remarketing Retail -->
+      <div class="store-card rounded-xl p-4 space-y-3 transition border" id="cardObj3">
+        <div class="flex items-start justify-between gap-3">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input 
+              type="checkbox" 
+              id="chkObj3" 
+              onchange="toggleObjective('obj3', this.checked)" 
+              class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer"
+            >
+            <div>
+              <span id="txtObj3Title" class="font-bold text-xs block text-slate-900 dark:text-slate-100">
+                Objective 3: Retail Dynamic Remarketing Tag
+              </span>
+              <p id="txtObj3Desc" class="text-[11px] leading-relaxed mt-1" style="color: var(--text-muted);">
+                Implement a Google Ads Dynamic Remarketing tag tailored for the Retail vertical. Ensure the tag reads the product feed identifier and catalog items from the DataLayer when users view products and browse the store.
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Objective 4: Deep Enterprise Extraction -->
+      <div class="store-card rounded-xl p-4 space-y-3 transition border" id="cardObj4">
+        <div class="flex items-start justify-between gap-3">
+          <label class="flex items-start gap-2.5 cursor-pointer">
+            <input 
+              type="checkbox" 
+              id="chkObj4" 
+              onchange="toggleObjective('obj4', this.checked)" 
+              class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 h-4 w-4 cursor-pointer"
+            >
+            <div>
+              <span id="txtObj4Title" class="font-bold text-xs block text-slate-900 dark:text-slate-100">
+                Objective 4: Deep Enterprise Property Extraction
+              </span>
+              <p id="txtObj4Desc" class="text-[11px] leading-relaxed mt-1" style="color: var(--text-muted);">
+                The checkout payload includes a deeply nested enterprise billing structure. Use browser DevTools and the DataLayer API to locate and extract the compliance security certificate hash without manually parsing large payloads.
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-4 border-t store-card text-center" style="border-color: var(--border-color);">
+      <button 
+        type="button" 
+        onclick="toggleObjectivesDrawer()" 
+        class="w-full py-2.5 rounded-xl border font-semibold text-xs transition hover:bg-slate-500/10 cursor-pointer"
+        style="border-color: var(--border-subtle);"
+      >
+        Close Checklist
+      </button>
+    </div>
+  </aside>
+
+  <!-- Drawer Backdrop Overlay -->
+  <div id="objectivesOverlay" onclick="toggleObjectivesDrawer()" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 hidden transition-opacity"></div>
+
+  <script>
+    function changeLanguage(langKey) {
+      if (!I18N[langKey]) return;
+      currentLang = langKey;
+      document.documentElement.lang = langKey;
+      const t = I18N[langKey];
+
+      // Update text labels
+      document.getElementById('txtBrandSub').textContent = t.brandSub;
+      document.getElementById('navStore').textContent = t.navCatalog;
+      document.getElementById('navContact').textContent = t.navContact;
+      document.getElementById('txtNavCart').textContent = t.navCart;
+      document.getElementById('txtBriefBtn').textContent = t.briefBtn;
+      document.getElementById('txtBannerBadge').textContent = t.bannerBadge;
+      document.getElementById('txtBannerTitle').textContent = t.bannerTitle;
+      document.getElementById('txtBannerDesc').textContent = t.bannerDesc;
+      document.getElementById('txtProductsTitle').textContent = t.productsTitle;
+      document.getElementById('txtContactTitle').textContent = t.contactTitle;
+      document.getElementById('txtContactDesc').textContent = t.contactDesc;
+      document.getElementById('lblFirstName').textContent = t.firstName;
+      document.getElementById('lblLastName').textContent = t.lastName;
+      document.getElementById('lblCorpEmail').textContent = t.corpEmail;
+      document.getElementById('lblPhone').textContent = t.phone;
+      document.getElementById('lblPostalCode').textContent = t.postalCode;
+      document.getElementById('lblCity').textContent = t.city;
+      document.getElementById('lblCountry').textContent = t.country;
+      document.getElementById('lblTechRequest').textContent = t.techRequest;
+      document.getElementById('txtDeploymentScope').placeholder = t.requestPlaceholder;
+      document.getElementById('btnSendLead').textContent = t.btnSendLead;
+      document.getElementById('txtCheckoutTitle').textContent = t.checkoutTitle;
+      document.getElementById('txtCheckoutDesc').textContent = t.checkoutDesc;
+      document.getElementById('txtBackToCatalog').textContent = t.backToCatalog;
+      document.getElementById('txtStep1Title').textContent = t.step1Title;
+      document.getElementById('lblFullName').textContent = t.fullName;
+      document.getElementById('lblBuyerEmail').textContent = t.corpEmail;
+      document.getElementById('lblBuyerPhone').textContent = t.phone;
+      document.getElementById('lblBuyerZip').textContent = t.postalCode;
+      document.getElementById('lblBuyerCity').textContent = t.city;
+      document.getElementById('btnConfirmStep1').textContent = t.btnConfirmStep1;
+      document.getElementById('txtStep2Title').textContent = t.step2Title;
+      document.getElementById('txtCorpInvoiceTitle').textContent = t.corpInvoiceTitle;
+      document.getElementById('txtCorpInvoiceDesc').textContent = t.corpInvoiceDesc;
+      document.getElementById('txtCorpInvoiceStatus').textContent = t.corpInvoiceStatus;
+      document.getElementById('btnPayText').textContent = t.btnPay;
+      document.getElementById('txtOrderSummary').textContent = t.orderSummary;
+      document.getElementById('txtSubtotal').textContent = t.subtotal;
+      document.getElementById('txtShipping').textContent = t.shipping;
+      document.getElementById('txtFreeShipping').textContent = t.freeShipping;
+      document.getElementById('txtTotal').textContent = t.total;
+      document.getElementById('txtOrderConfirmedTitle').textContent = t.orderConfirmedTitle;
+      document.getElementById('txtOrderConfirmedDesc').textContent = t.orderConfirmedDesc;
+      document.getElementById('txtLeadConfirmedTitle').textContent = t.leadConfirmedTitle;
+      document.getElementById('txtLeadConfirmedDesc').textContent = t.leadConfirmedDesc;
+      document.getElementById('btnReturnStore1').textContent = t.btnReturnStore;
+      document.getElementById('btnReturnStore2').textContent = t.btnReturnStore;
+      document.getElementById('txtToastMain').textContent = t.addedToast;
+      document.getElementById('txtModalAdd').textContent = t.btnAdd;
+      document.getElementById('txtFooterEnv').textContent = t.footerText;
+
+      // Drawer Labels
+      document.getElementById('txtDrawerTitle').querySelector('span').textContent = t.drawerTitle;
+      document.getElementById('txtDrawerSubtitle').textContent = t.drawerSubtitle;
+      document.getElementById('txtNoticeTitle').textContent = t.guidanceNoticeTitle;
+      document.getElementById('txtNoticeBody').textContent = t.guidanceNoticeBody;
+      document.getElementById('txtObj1Title').textContent = t.obj1Title;
+      document.getElementById('txtObj1Desc').textContent = t.obj1Desc;
+      document.getElementById('txtObj2Title').textContent = t.obj2Title;
+      document.getElementById('txtObj2Desc').textContent = t.obj2Desc;
+      document.getElementById('txtObj3Title').textContent = t.obj3Title;
+      document.getElementById('txtObj3Desc').textContent = t.obj3Desc;
+      document.getElementById('txtObj4Title').textContent = t.obj4Title;
+      document.getElementById('txtObj4Desc').textContent = t.obj4Desc;
+
+      updateDrawerProgress();
+      renderCatalog();
+    }
+
+    function toggleObjective(key, isChecked) {
+      completedObjectives[key] = isChecked;
+      const card = document.getElementById('card' + key.charAt(0).toUpperCase() + key.slice(1));
+      if (card) {
+        if (isChecked) {
+          card.classList.add('border-emerald-500/50', 'bg-emerald-500/5');
+        } else {
+          card.classList.remove('border-emerald-500/50', 'bg-emerald-500/5');
+        }
+      }
+      updateDrawerProgress();
+    }
+
+    function updateDrawerProgress() {
+      const total = 4;
+      const completedCount = Object.values(completedObjectives).filter(Boolean).length;
+      const t = I18N[currentLang];
+      
+      const progressText = `${completedCount} of ${total} ${t.progressText}`;
+      document.getElementById('drawerProgressText').textContent = progressText;
+      document.getElementById('progressPill').textContent = `${completedCount}/${total}`;
+
+      const pct = (completedCount / total) * 100;
+      document.getElementById('drawerProgressBar').style.width = `${pct}%`;
+
+      if (completedCount === total) {
+        document.getElementById('progressPill').className = 'text-[11px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold';
+      } else {
+        document.getElementById('progressPill').className = 'text-[11px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold';
+      }
+    }
+
+    function handleRouting() {
+      const hash = window.location.hash || '';
+      const path = window.location.pathname || '';
+      
+      // Hide all routes
+      document.getElementById('routeCatalog').classList.add('hidden');
+      document.getElementById('routeContact').classList.add('hidden');
+      document.getElementById('routeCheckout').classList.add('hidden');
+      document.getElementById('routeOrderConfirmed').classList.add('hidden');
+      document.getElementById('routeContactThankYou').classList.add('hidden');
+
+      // Reset Nav styles
+      document.getElementById('navStore').className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 transition';
+      document.getElementById('navContact').className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 transition';
+
+      const isContactThankYou = hash.includes('thank-you') || path.endsWith('/thank-you');
+      const isOrderConfirmed = hash.includes('order-confirmed') || path.endsWith('/order-confirmed');
+      const isContact = hash.includes('/contact') || path.endsWith('/contact');
+      const isCheckout = hash.includes('/checkout') || path.endsWith('/checkout');
+
+      if (isContactThankYou) {
+        document.getElementById('routeContactThankYou').classList.remove('hidden');
+        // REAL RELOAD LIFECYCLE: window.dataLayer is re-initialized on thank-you page
+        window.dataLayer = [{
+          event: 'page_view_thankyou',
+          page_type: 'thank_you',
+          page_path: '/dataLayer-playground/thank-you'
+        }];
+      } else if (isOrderConfirmed) {
+        document.getElementById('routeOrderConfirmed').classList.remove('hidden');
+        // REAL RELOAD LIFECYCLE: window.dataLayer is re-initialized / empty of previous order data!
+        window.dataLayer = [{
+          event: 'page_view_thankyou',
+          page_type: 'thank_you',
+          page_path: '/dataLayer-playground/order-confirmed'
+        }];
+      } else if (isContact) {
+        document.getElementById('routeContact').classList.remove('hidden');
+        document.getElementById('navContact').className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-blue-600 dark:text-blue-400 bg-blue-500/10 transition';
+        window.dataLayer.push({
+          event: 'page_view',
+          page_path: '/dataLayer-playground/contact'
+        });
+      } else if (isCheckout) {
+        document.getElementById('routeCheckout').classList.remove('hidden');
+        renderCartSummary();
+        window.dataLayer.push({
+          event: 'page_view',
+          page_path: '/dataLayer-playground/checkout'
+        });
+      } else {
+        // Default Catalog
+        document.getElementById('routeCatalog').classList.remove('hidden');
+        document.getElementById('navStore').className = 'px-2.5 sm:px-3 py-1.5 rounded-lg text-blue-600 dark:text-blue-400 bg-blue-500/10 transition';
+        window.dataLayer.push({
+          event: 'page_view',
+          page_path: '/dataLayer-playground'
+        });
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function performRedirect(targetUrl, fallbackHash) {
+      const isVercelHost = window.location.hostname.includes('training-tplis.app.vercel.app') || 
+                           window.location.hostname.includes('vercel.app');
+      
+      const isIframe = (window.self !== window.top);
+
+      if (isVercelHost && !isIframe) {
+        window.location.href = targetUrl;
+      } else {
+        try {
+          window.location.hash = fallbackHash;
+        } catch (e) {
+          window.location.href = targetUrl;
+        }
+      }
+    }
+
+    function renderCatalog() {
+      const container = document.getElementById('catalogGrid');
+      const t = I18N[currentLang];
+      container.innerHTML = PRODUCTS.map(p => `
+        <div class="store-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-blue-500/40 transition">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] font-mono">
+              <span class="text-blue-600 dark:text-blue-400 font-semibold">${p.category}</span>
+              <span class="text-amber-500 font-semibold">${p.id}</span>
+            </div>
+            
+            <div class="h-32 rounded-xl store-subtle flex items-center justify-center text-slate-400">
+              <i data-lucide="${p.icon}" class="w-12 h-12 text-blue-500/80"></i>
+            </div>
+
+            <h3 class="font-bold text-sm tracking-tight">${p.name}</h3>
+            <p class="text-xs leading-relaxed" style="color: var(--text-muted);">${p.desc}</p>
+          </div>
+
+          <div class="pt-3 border-t flex items-center justify-between" style="border-color: var(--border-color);">
+            <div class="text-base font-bold font-mono">€${p.price.toFixed(2)}</div>
+            <div class="flex items-center gap-1.5">
+              <button 
+                type="button"
+                onclick="openProductModal('${p.id}')"
+                class="px-2.5 py-1.5 rounded-lg border text-xs font-medium hover:border-blue-500 transition cursor-pointer"
+                style="border-color: var(--border-subtle); background-color: var(--bg-surface);"
+              >
+                ${t.btnDetails}
+              </button>
+              <button 
+                type="button"
+                onclick="addToCart('${p.id}')"
+                class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-1 transition cursor-pointer"
+              >
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>${t.btnAdd}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function openProductModal(productId) {
+      const p = PRODUCTS.find(item => item.id === productId);
+      if (!p) return;
+
+      document.getElementById('modalTitle').textContent = p.name;
+      document.getElementById('modalCategory').textContent = p.category;
+      document.getElementById('modalId').textContent = p.id;
+      document.getElementById('modalDescription').textContent = p.desc;
+      document.getElementById('modalPrice').textContent = `€${p.price.toFixed(2)}`;
+
+      const addBtn = document.getElementById('modalAddCartBtn');
+      addBtn.onclick = () => {
+        addToCart(p.id);
+        closeProductModal();
+      };
+
+      // Standard Google Ads Dynamic Remarketing (Retail) view_item push
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({
+        event: 'view_item',
+        ecommerce: {
+          currency: 'EUR',
+          value: p.price,
+          items: [
+            {
+              id: p.id,
+              item_name: p.name,
+              price: p.price,
+              quantity: 1,
+              google_business_vertical: 'retail',
+              item_category: p.category
+            }
+          ]
+        }
+      });
+
+      document.getElementById('productModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').classList.add('hidden');
+    }
+
+    let toastTimeout;
+    function showCartFeedback(productName) {
+      const toast = document.getElementById('cartToast');
+      const nameEl = document.getElementById('toastProductName');
+      if (toast && nameEl) {
+        nameEl.textContent = productName;
+        toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+        }, 2400);
+      }
+
+      const badge = document.getElementById('cartCountBadge');
+      if (badge) {
+        badge.classList.add('scale-125');
+        setTimeout(() => badge.classList.remove('scale-125'), 200);
+      }
+    }
+
+    function addToCart(productId) {
+      const prod = PRODUCTS.find(p => p.id === productId);
+      if (!prod) return;
+
+      const existing = cart.find(i => i.product.id === prod.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ product: prod, quantity: 1 });
+      }
+
+      updateCartBadge();
+      showCartFeedback(prod.name);
+
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({
+        event: 'add_to_cart',
+        ecommerce: {
+          currency: 'EUR',
+          value: prod.price,
+          items: [{
+            id: prod.id,
+            item_name: prod.name,
+            price: prod.price,
+            quantity: 1,
+            google_business_vertical: 'retail'
+          }]
+        }
+      });
+    }
+
+    function updateCartBadge() {
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cartCountBadge').textContent = totalCount;
+    }
+
+    function renderCartSummary() {
+      const container = document.getElementById('cartSummaryList');
+      const t = I18N[currentLang];
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="text-slate-400 py-3 text-center">${t.emptyCart}</div>`;
+        document.getElementById('subtotalDisplay').textContent = '0.00';
+        document.getElementById('grandTotalDisplay').textContent = '0.00';
+        document.getElementById('btnTotalDisplay').textContent = '0.00';
+        return;
+      }
+
+      let grandTotal = 0;
+      container.innerHTML = cart.map((item) => {
+        const itemTot = item.product.price * item.quantity;
+        grandTotal += itemTot;
+        return `
+          <div class="flex items-center justify-between gap-2 border-b pb-2" style="border-color: var(--border-color);">
+            <div class="truncate">
+              <span class="font-medium block truncate">${item.product.name}</span>
+              <span class="text-[11px] font-mono text-slate-400">Qty: ${item.quantity} × €${item.product.price.toFixed(2)}</span>
+            </div>
+            <div class="font-mono font-semibold text-right">€${itemTot.toFixed(2)}</div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('subtotalDisplay').textContent = grandTotal.toFixed(2);
+      document.getElementById('grandTotalDisplay').textContent = grandTotal.toFixed(2);
+      document.getElementById('btnTotalDisplay').textContent = grandTotal.toFixed(2);
+    }
+
+    function handleCheckoutStep1(e) {
+      e.preventDefault();
+      const nameParts = document.getElementById('buyerName').value.trim().split(' ');
+      const email = document.getElementById('buyerEmail').value.trim();
+      const phone = document.getElementById('buyerPhone').value.trim();
+      const zip = document.getElementById('buyerZip').value.trim();
+      const city = document.getElementById('buyerCity').value.trim();
+
+      buyerData = {
+        email_address: email,
+        phone_number: phone,
+        address: {
+          first_name: nameParts[0] || 'Laura',
+          last_name: nameParts.slice(1).join(' ') || 'De Angelis',
+          postal_code: zip,
+          city: city,
+          country: 'IT'
+        }
+      };
+
+      // Push user_data prior to payment submission
+      window.dataLayer.push({
+        event: 'user_data_ready',
+        checkout_step: 1,
+        user_data: buyerData
+      });
+
+      // Enable Step 2
+      const step2Box = document.getElementById('checkoutStep2Box');
+      step2Box.classList.remove('opacity-50', 'pointer-events-none');
+      document.getElementById('step2Badge').className = 'w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs';
+      const t = I18N[currentLang];
+      document.getElementById('step1StatusBadge').textContent = t.step1BadgeDone;
+      document.getElementById('step1StatusBadge').className = 'text-[11px] font-mono text-emerald-500 font-semibold';
+    }
+
+    function executePurchaseAndRedirect() {
+      if (cart.length === 0) return;
+
+      const totalVal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const itemsPayload = cart.map(item => ({
+        id: item.product.id,
+        item_name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+        google_business_vertical: 'retail'
+      }));
+      const txId = 'TX_' + Math.floor(100000 + Math.random() * 900000);
+
+      // PUSH OCCURS ON THE PRECEDING MESSAGE BEFORE PAGE REDIRECT
+      // Includes standard retail remarketing items AND deeply nested monster payload
+      window.dataLayer.push({ ecommerce: null });
+      window.dataLayer.push({
+        event: 'purchase_submitted',
+        ecommerce: {
+          transaction_id: txId,
+          value: parseFloat(totalVal.toFixed(2)),
+          currency: 'EUR',
+          items: itemsPayload
+        },
+        enterprise_billing: {
+          organization: {
+            legal_name: 'Acme Global Infrastructure S.p.A.',
+            tax_identifiers: [
+              { type: 'VAT', id: 'IT12345678901', validated: true },
+              { type: 'SDI', id: 'M5UXCR1', validated: true }
+            ]
+          },
+          accounts: {
+            primary: {
+              account_id: 'ACC_TECH_9921',
+              contracts: {
+                contract_ref: 'CTR-2026-CLOUD-9',
+                sub_clauses: {
+                  legal_jurisdiction: 'EU-IT',
+                  security_audit: {
+                    compliance_cert_hash: 'SHA256_99b7c84df12a4e889b01c3e98124fa',
+                    audit_timestamp: 1727083200
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Clear cart
+      cart = [];
+      updateCartBadge();
+      document.getElementById('thankyouTxDisplay').textContent = `Transaction Reference: ${txId}`;
+
+      // Trigger navigation
+      performRedirect(
+        'https://training-tplis.app.vercel.app/dataLayer-playground/order-confirmed',
+        '#/dataLayer-playground/order-confirmed'
+      );
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const fn = document.getElementById('leadFirstName').value.trim();
+      const ln = document.getElementById('leadLastName').value.trim();
+      const email = document.getElementById('leadEmail').value.trim();
+      const phone = document.getElementById('leadPhone').value.trim();
+      const zip = document.getElementById('leadZip').value.trim();
+      const city = document.getElementById('leadCity').value.trim();
+      const country = document.getElementById('leadCountry').value.trim();
+
+      const leadUserData = {
+        email_address: email,
+        phone_number: phone,
+        address: {
+          first_name: fn,
+          last_name: ln,
+          postal_code: zip,
+          city: city,
+          country: country
+        }
+      };
+
+      // Push lead event before redirect
+      window.dataLayer.push({
+        event: 'lead_form_submitted',
+        form_id: 'enterprise_quote_request',
+        user_data: leadUserData
+      });
+
+      // Trigger navigation
+      performRedirect(
+        'https://training-tplis.app.vercel.app/dataLayer-playground/thank-you',
+        '#/dataLayer-playground/thank-you'
+      );
+    }
+
+    function toggleObjectivesDrawer() {
+      const drawer = document.getElementById('objectivesDrawer');
+      const overlay = document.getElementById('objectivesOverlay');
+      const isClosed = drawer.classList.contains('translate-x-full');
+
+      if (isClosed) {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // App Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCatalog();
+      updateCartBadge();
+      updateDrawerProgress();
+      lucide.createIcons();
+      handleRouting();
+    });
+
+    // Listen to hash changes
+    window.addEventListener('hashchange', handleRouting);
+  </script>
+</body>
+</html>
