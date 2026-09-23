@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Google Technical Solutions | Training Hub</title>
   
-  <!-- Inter Font (Google Sans / Modernist geometric alternative) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -38,11 +35,10 @@
 </head>
 <body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 min-h-screen flex flex-col font-sans antialiased selection:bg-blue-500/20 selection:text-blue-600 transition-colors duration-200">
 
-  <!-- Top Navigation Bar -->
+  <!-- Top Navigation -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-zinc-950/80 border-b border-zinc-200 dark:border-zinc-800">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <!-- Google colored dots icon indicator -->
         <div class="flex items-center gap-1">
           <span class="w-2.5 h-2.5 rounded-full bg-[#4285F4]"></span>
           <span class="w-2.5 h-2.5 rounded-full bg-[#EA4335]"></span>
@@ -50,22 +46,38 @@
           <span class="w-2.5 h-2.5 rounded-full bg-[#34A853]"></span>
         </div>
         <span class="text-sm font-semibold tracking-tight text-zinc-800 dark:text-zinc-200 ml-1">
-          Tech Solutions <span class="text-zinc-400 font-normal">| Training Hub</span>
+          Tech Solutions <span class="text-zinc-400 font-normal">| <span data-i18n="navSubtitle">Training Hub</span></span>
         </span>
       </div>
 
-      <!-- Theme Switcher & Status -->
-      <div class="flex items-center gap-4">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/40">
+      <div class="flex items-center gap-3">
+        <!-- Live Status Pill -->
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800/40">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          Live Sessions
+          <span data-i18n="statusLive">Live Sessions</span>
         </span>
-        <button id="themeToggle" aria-label="Cambia tema" class="p-2 text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
-          <!-- Sun Icon -->
+
+        <!-- Language Selector (EN default) -->
+        <div class="relative">
+          <select id="langSelect" aria-label="Select language" class="appearance-none bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-medium rounded-lg pl-2.5 pr-7 py-1.5 focus:outline-none focus:ring-1 focus:ring-google-blue cursor-pointer">
+            <option value="en">EN</option>
+            <option value="it">IT</option>
+            <option value="de">DE</option>
+            <option value="nl">NL</option>
+            <option value="es">ES</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-zinc-400">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggle" aria-label="Toggle theme" class="p-2 text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
           <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <!-- Moon Icon -->
           <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
@@ -74,33 +86,33 @@
     </div>
   </header>
 
-  <!-- Main Container -->
+  <!-- Main Content -->
   <main class="flex-1 max-w-5xl mx-auto px-6 py-14 w-full">
     
-    <!-- Hero / Presentazione Sintetica -->
+    <!-- Hero Section -->
     <div class="max-w-2xl mb-12">
       <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-zinc-100 text-zinc-600 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 mb-4">
         <span>gTech Enablement</span>
         <span class="text-zinc-300 dark:text-zinc-700">•</span>
-        <span>Sandbox & Docs</span>
+        <span data-i18n="badgeScope">Sandboxes & Docs</span>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight mb-3">
-        Ambienti pratici, playground e guide tecniche.
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white leading-tight mb-3" data-i18n="heroTitle">
+        Interactive environments, playgrounds, and technical blueprints.
       </h1>
-      <p class="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-        Piattaforma di supporto all'apprendimento pratico per technical onboarding, test di architetture di tracciamento e consultazione di risorse enterprise.
+      <p class="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed" data-i18n="heroSubtitle">
+        Practical enablement platform for technical onboarding, tracking architecture validation, and enterprise implementation resources.
       </p>
     </div>
 
-    <!-- Moduli / Playgrounds Grid -->
+    <!-- Active Hub Cards -->
     <div class="space-y-4">
-      <div class="text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 px-1">
-        Playground & Sandbox Attive
+      <div class="text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 px-1" data-i18n="sectionHeader">
+        Active Sandboxes & Playgrounds
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         
-        <!-- CARD: dataLayer Playground (Link principale) -->
+        <!-- CARD: dataLayer Playground -->
         <a href="https://training-tplis.vercel.app/dataLayer-playground" 
            class="group relative flex flex-col justify-between p-6 bg-white dark:bg-zinc-900/60 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 hover:border-google-blue dark:hover:border-google-blue/80 shadow-sm hover:shadow-md transition-all duration-200">
           <div>
@@ -109,7 +121,7 @@
                 d{ }
               </div>
               <span class="inline-flex items-center gap-1 text-xs font-medium text-zinc-400 group-hover:text-google-blue transition-colors">
-                Apri playground
+                <span data-i18n="cardOpen">Launch playground</span>
                 <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
@@ -119,8 +131,8 @@
             <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-google-blue transition-colors mb-1">
               dataLayer Playground
             </h2>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
-              Ambiente interattivo per testare push custom, eventi e-commerce GA4 e logiche di trigger in tempo reale.
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4" data-i18n="cardDescPlayground">
+              Live testing sandbox for custom pushes, GA4 e-commerce events, and real-time trigger debugging.
             </p>
           </div>
 
@@ -131,28 +143,28 @@
           </div>
         </a>
 
-        <!-- CARD PLACEHOLDER: Knowledge Base (In Arrivo) -->
+        <!-- CARD: Knowledge Base (Coming Soon) -->
         <div class="flex flex-col justify-between p-6 bg-zinc-50/50 dark:bg-zinc-900/20 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 opacity-70">
           <div>
             <div class="flex items-center justify-between gap-4 mb-4">
               <div class="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 font-mono text-sm">
                 📚
               </div>
-              <span class="px-2 py-0.5 text-[11px] font-mono rounded bg-zinc-200/50 dark:bg-zinc-800 text-zinc-500">
-                In Arrivo
+              <span class="px-2 py-0.5 text-[11px] font-mono rounded bg-zinc-200/50 dark:bg-zinc-800 text-zinc-500" data-i18n="cardComingSoon">
+                Coming Soon
               </span>
             </div>
 
-            <h2 class="text-base font-semibold text-zinc-800 dark:text-zinc-200 mb-1">
+            <h2 class="text-base font-semibold text-zinc-800 dark:text-zinc-200 mb-1" data-i18n="cardKbTitle">
               Technical Knowledge Base
             </h2>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              Snippet pronti per il tagging, blueprint architetturali, guide alle API e best practice di integrazione.
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed" data-i18n="cardKbDesc">
+              Ready-to-use tagging snippets, architectural blueprints, API documentation, and implementation best practices.
             </p>
           </div>
 
           <div class="flex items-center gap-2 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/40">
-            <span class="text-xs text-zinc-400 italic">Moduli di formazione in fase di revisione</span>
+            <span class="text-xs text-zinc-400 italic" data-i18n="cardKbFooter">Curriculum modules currently in technical review</span>
           </div>
         </div>
 
@@ -163,32 +175,128 @@
   <!-- Footer -->
   <footer class="border-t border-zinc-200 dark:border-zinc-800 mt-auto py-6">
     <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
-      <p>Google Technical Solutions Enablement</p>
+      <p data-i18n="footerText">Google Technical Solutions Enablement</p>
       <p class="font-mono text-[11px]">training-tplis.vercel.app</p>
     </div>
   </footer>
 
-  <!-- Script gestione Dark Mode -->
+  <!-- Script: Theme & i18n Dictionary -->
   <script>
+    // Theme Handler
     const themeToggle = document.getElementById('themeToggle');
-    
-    // Check initial preference
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
 
-    // Toggle on click
     themeToggle.addEventListener('click', () => {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-      }
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
     });
+
+    // i18n Dictionary (EN default, IT, DE, NL, ES)
+    const translations = {
+      en: {
+        navSubtitle: "Training Hub",
+        statusLive: "Live Sessions",
+        badgeScope: "Sandboxes & Docs",
+        heroTitle: "Interactive environments, playgrounds, and technical blueprints.",
+        heroSubtitle: "Practical enablement platform for technical onboarding, tracking architecture validation, and enterprise implementation resources.",
+        sectionHeader: "Active Sandboxes & Playgrounds",
+        cardOpen: "Launch playground",
+        cardDescPlayground: "Live testing sandbox for custom pushes, GA4 e-commerce events, and real-time trigger debugging.",
+        cardComingSoon: "Coming Soon",
+        cardKbTitle: "Technical Knowledge Base",
+        cardKbDesc: "Ready-to-use tagging snippets, architectural blueprints, API documentation, and implementation best practices.",
+        cardKbFooter: "Curriculum modules currently in technical review",
+        footerText: "Google Technical Solutions Enablement"
+      },
+      it: {
+        navSubtitle: "Hub di Formazione",
+        statusLive: "Sessioni Attive",
+        badgeScope: "Sandbox & Docs",
+        heroTitle: "Ambienti pratici, playground e guide tecniche.",
+        heroSubtitle: "Piattaforma di supporto pratico per technical onboarding, test di architetture di tracciamento e risorse enterprise.",
+        sectionHeader: "Playground & Sandbox Attive",
+        cardOpen: "Apri playground",
+        cardDescPlayground: "Ambiente interattivo per testare push custom, eventi e-commerce GA4 e logiche di trigger in tempo reale.",
+        cardComingSoon: "In Arrivo",
+        cardKbTitle: "Knowledge Base Tecnica",
+        cardKbDesc: "Snippet pronti per il tagging, blueprint architetturali, guide API e best practice di integrazione.",
+        cardKbFooter: "Moduli di formazione in fase di revisione tecnica",
+        footerText: "Google Technical Solutions Enablement"
+      },
+      de: {
+        navSubtitle: "Training Hub",
+        statusLive: "Live-Sitzungen",
+        badgeScope: "Sandboxes & Dokumentation",
+        heroTitle: "Interaktive Umgebungen, Playgrounds und technische Blueprints.",
+        heroSubtitle: "Praxisorientierte Plattform für technisches Onboarding, Validierung von Tracking-Architekturen und Enterprise-Ressourcen.",
+        sectionHeader: "Aktive Sandboxes & Playgrounds",
+        cardOpen: "Playground starten",
+        cardDescPlayground: "Live-Testumgebung für benutzerdefinierte Pushes, GA4-E-Commerce-Events und Echtzeit-Trigger-Debugging.",
+        cardComingSoon: "Demnächst",
+        cardKbTitle: "Technische Knowledge Base",
+        cardKbDesc: "Einsatzbereite Tagging-Snippets, Architektur-Blueprints, API-Dokumentationen und Best Practices.",
+        cardKbFooter: "Schulungsmodule befinden sich derzeit im Review",
+        footerText: "Google Technical Solutions Enablement"
+      },
+      nl: {
+        navSubtitle: "Training Hub",
+        statusLive: "Live Sessies",
+        badgeScope: "Sandboxes & Docs",
+        heroTitle: "Interactieve omgevingen, playgrounds en technische blueprints.",
+        heroSubtitle: "Praktisch platform voor technische onboarding, validatie van tracking-architecturen en enterprise-oplossingen.",
+        sectionHeader: "Actieve Sandboxes & Playgrounds",
+        cardOpen: "Open playground",
+        cardDescPlayground: "Live testomgeving voor custom pushes, GA4 e-commerce events en real-time trigger debugging.",
+        cardComingSoon: "Binnenkort",
+        cardKbTitle: "Technische Knowledge Base",
+        cardKbDesc: "Direct inzetbare tagging-snippets, architectuur-blueprints, API-documentatie en best practices.",
+        cardKbFooter: "Trainingsmodules worden momenteel beoordeeld",
+        footerText: "Google Technical Solutions Enablement"
+      },
+      es: {
+        navSubtitle: "Centro de Formación",
+        statusLive: "Sesiones en Vivo",
+        badgeScope: "Sandboxes y Documentación",
+        heroTitle: "Entornos interactivos, playgrounds y guías técnicas.",
+        heroSubtitle: "Plataforma práctica para el onboarding técnico, validación de arquitecturas de medición y recursos empresariales.",
+        sectionHeader: "Sandboxes y Playgrounds Activos",
+        cardOpen: "Abrir playground",
+        cardDescPlayground: "Entorno interactivo para probar pushes personalizados, eventos de e-commerce GA4 y depuración de triggers.",
+        cardComingSoon: "Próximamente",
+        cardKbTitle: "Base de Conocimiento Técnica",
+        cardKbDesc: "Snippets de etiquetado listos para usar, diagramas de arquitectura, guías de APIs y mejores prácticas.",
+        cardKbFooter: "Módulos de formación actualmente en revisión técnica",
+        footerText: "Google Technical Solutions Enablement"
+      }
+    };
+
+    // Switch Language Function
+    function setLanguage(lang) {
+      const selectedLang = translations[lang] ? lang : 'en';
+      document.documentElement.lang = selectedLang;
+      localStorage.setItem('preferred_lang', selectedLang);
+      
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[selectedLang][key]) {
+          el.textContent = translations[selectedLang][key];
+        }
+      });
+
+      document.getElementById('langSelect').value = selectedLang;
+    }
+
+    const langSelect = document.getElementById('langSelect');
+    langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+
+    // Initialize with EN default or stored preference
+    const initialLang = localStorage.getItem('preferred_lang') || 'en';
+    setLanguage(initialLang);
   </script>
 </body>
 </html>
